@@ -11,9 +11,9 @@ namespace NotesMarketPlace.EmailTemplates
     {
         public static void SellerPublishNote(string usersubject, string name, string comment)
         {
-            var fromEmail = new MailAddress("karathiyanirav2000@gmail.com", "Notes Marketplace"); //need system email
-            var toEmail = new MailAddress("karathiyanirav@gmail.com");
-            var fromEmailPassword = "Nirav@1109"; // Replace with actual password
+            var fromEmail = new MailAddress("suportedemail", "Notes Marketplace"); //need system email
+            var toEmail = new MailAddress("admin email");
+            var fromEmailPassword = "password"; // Replace with actual password
             string subject = name + " - " + usersubject;
             string msg = "Hello,<br/>";
             msg += comment;
