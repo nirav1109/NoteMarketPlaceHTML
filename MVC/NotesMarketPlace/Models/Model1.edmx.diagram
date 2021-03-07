@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="67d9e7b3fe3e4c1c8b14d50d1364d34b" Name="Diagram1">
+        <EntityTypeShape EntityType="NMModel.ContactUs" Width="1.5" PointX="2.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NMModel.Countries" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NMModel.DownloadNotes" Width="1.5" PointX="8.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NMModel.NoteCategories" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NMModel.NoteDetails" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NMModel.NoteReviews" Width="1.5" PointX="10.5" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="NMModel.NoteStatus" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NMModel.NoteType" Width="1.5" PointX="0.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="NMModel.SellerNoteAttachment" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NMModel.SpamReports" Width="1.5" PointX="13.5" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NMModel.SystemConfigurations" Width="1.5" PointX="4.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NMModel.UserProfile" Width="1.5" PointX="6" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NMModel.UserRoles" Width="1.5" PointX="1.5" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NMModel.Users" Width="1.5" PointX="0.75" PointY="17.5" IsExpanded="true" />
+        <AssociationConnector Association="NMModel.FK_NoteDetails_CountryID" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_UserProfile_CountryID" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_DownloadNotes_BuyerID" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_DownloadNotes_NoteID" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_DownloadNotes_SellerID" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_NoteReviews_AgainstDownloadID" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_SpamReports_AgainstDownloadID" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_NoteDetails_NoteCategoryID" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_NoteDetails_ActionBy" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_NoteDetails_NoteType" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_NoteDetails_SellerID" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_NoteDetails_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_NoteReviews_NoteID" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_SellerNoteAttachment_NoteID" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_SpamReports_NoteID" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_NoteReviews_ReviewByID" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_SpamReports_ReportByID" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_UserProfile_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="NMModel.FK_Users_UserRoleID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
