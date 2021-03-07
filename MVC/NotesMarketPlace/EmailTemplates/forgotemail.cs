@@ -13,9 +13,9 @@ namespace NotesMarketPlace.EmailTemplates
 
         public static void SendOtpToEmail(Users u, string  otp)
         {
-            var fromEmail = new MailAddress("karathiyanirav2000@gmail.com", "Notes Marketplace"); //system email
+            var fromEmail = new MailAddress("supportedemail", "Notes Marketplace"); //system email
             var toEmail = new MailAddress(u.EmailID);
-            var fromEmailPassword = "Nirav@1109"; //actual password
+            var fromEmailPassword = "password"; //actual password
             string subject = "New Temporary Password has been created for you";
             string msg = "Hello " + u.FirstName + " " + u.LastName + "<br/>";
             msg += "We have generated a new password for you <br/>";
