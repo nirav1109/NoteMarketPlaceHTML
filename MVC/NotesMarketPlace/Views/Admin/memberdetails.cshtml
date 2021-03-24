@@ -189,10 +189,52 @@
             <div class="content-box-lg with-bottom-border">
                 <p class="box-heading">Member Details</p>
                 <div class="row no-gutters member-details-wrapper">
-
+                    @{
+                        IEnumerable<NotesMarketPlace.Models.AllProgressNotes> profileData = ViewBag.profile;
+                        int s = 0;
+                        ViewBag.fname = "";
+                        ViewBag.lname = "";
+                        ViewBag.address1 = "";
+                        ViewBag.address2 = "";
+                        ViewBag.email = "";
+                        ViewBag.dob = "";
+                        ViewBag.phone = "";
+                        ViewBag.college = "";
+                        ViewBag.city = "";
+                        ViewBag.state = "";
+                        ViewBag.country = "";
+                        ViewBag.zipcode = "";
+                        ViewBag.dpPath = "";
+                        ViewBag.university = "";
+                        foreach (var i in profileData)
+                        {
+                            ViewBag.fname = i.user.FirstName;
+                            ViewBag.lname = i.user.LastName;
+                            ViewBag.address1 = i.uprofiledata.AddressLine1;
+                            ViewBag.address2 = i.uprofiledata.AddressLine2;
+                            ViewBag.email = i.user.EmailID;
+                            ViewBag.dob = i.uprofiledata.DateOfBirth;
+                            ViewBag.phone = i.uprofiledata.PhoneNumber;
+                            ViewBag.dpPath = i.uprofiledata.ProfilePicture;
+                            ViewBag.college = i.uprofiledata.College;
+                            ViewBag.city =i.uprofiledata.City;
+                            ViewBag.state = i.uprofiledata.State;
+                            ViewBag.country = i.country.CountryName;
+                            ViewBag.zipcode = i.uprofiledata.ZipCode;
+                            ViewBag.university = i.uprofiledata.University;
+                        }
+                    }
                     <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12">
                         <div class="member-photo">
-                            <img src="~/Content/Admin/images/member-details/member.png" alt="">
+                            @if (ViewBag.dpPath != null)
+                            {
+                                <img src="@Url.Content(ViewBag.dpPath)" alt="">
+                            }
+                            else
+                            {
+                                <img src="~/Content/Admin/images/member-details/member.png" alt="">
+                            }
+
                         </div>
                     </div>
 
@@ -214,12 +256,12 @@
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                                             <div class="member-single-detail-right-wrapper">
-                                                <p class="member-single-detail-right">Richard</p>
-                                                <p class="member-single-detail-right">Brown</p>
-                                                <p class="member-single-detail-right">richbrown77@gmail.com</p>
-                                                <p class="member-single-detail-right">13-08-1990</p>
-                                                <p class="member-single-detail-right">9856742033</p>
-                                                <p class="member-single-detail-right">University of California</p>
+                                                <p class="member-single-detail-right">@ViewBag.fname</p>
+                                                <p class="member-single-detail-right">@ViewBag.lname</p>
+                                                <p class="member-single-detail-right"> @ViewBag.email</p>
+                                                <p class="member-single-detail-right">@ViewBag.dob</p>
+                                                <p class="member-single-detail-right">@ViewBag.phone</p>
+                                                <p class="member-single-detail-right">@ViewBag.college , @ViewBag.university</p>
                                             </div>
                                         </div>
                                     </div>
@@ -241,12 +283,12 @@
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                                             <div class="member-single-detail-right-wrapper">
-                                                <p class="member-single-detail-right">144-Diamond Height</p>
-                                                <p class="member-single-detail-right">Star Colony</p>
-                                                <p class="member-single-detail-right">New Youk</p>
-                                                <p class="member-single-detail-right">New York State</p>
-                                                <p class="member-single-detail-right">United State</p>
-                                                <p class="member-single-detail-right">11004-05</p>
+                                                <p class="member-single-detail-right">@ViewBag.address1</p>
+                                                <p class="member-single-detail-right"> @ViewBag.address2</p>
+                                                <p class="member-single-detail-right"> @ViewBag.city</p>
+                                                <p class="member-single-detail-right">@ViewBag.state</p>
+                                                <p class="member-single-detail-right">@ViewBag.country</p>
+                                                <p class="member-single-detail-right">@ViewBag.zipcode</p>
                                             </div>
                                         </div>
                                     </div>
@@ -291,117 +333,35 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach (var i in profileData)
+                                        {
+                                            s++;
+                                    <tr>
+                                        <td class="text-center">s</td>
+                                        <td class="purple-td">@i.SellerNotes.NoteTitle</td>
+                                        <td>@i.Category.CategoryName</td>
+                                        <td>@i.status.Status</td>
+                                        <td class="text-center">22</td>
+                                        <td class="text-center">$177</td>
+                                        <td>@i.SellerNotes.CreatedDate</td>
+                                        <td>09-10-2020, 10:10</td>
+                                        <td class="text-center visible-overflow-for-dropdown">
+                                            <div class="dropdown dropdown-dots-table">
+                                                <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img class="dots-in-table" src="~/Content/Admin/images/Dashboard/dots.png" alt="edit">
+                                                </a>
 
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td class="purple-td">Softwere Development</td>
-                                    <td>It</td>
-                                    <td>Published</td>
-                                    <td class="text-center">22</td>
-                                    <td class="text-center">$177</td>
-                                    <td>09-10-2020, 10:10</td>
-                                    <td>09-10-2020, 10:10</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/Admin/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Notes</a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    <a class="dropdown-item" href="#">Download Notes</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                }
 
-                                <tr>
-                                    <td class="text-center">2</td>
-                                    <td class="purple-td">Computer Basic</td>
-                                    <td>Computer</td>
-                                    <td>Published</td>
-                                    <td class="text-center">4</td>
-                                    <td class="text-center">$125</td>
-                                    <td>10-10-2020, 11:25</td>
-                                    <td>10-10-2020, 11:25</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/Admin/images/Dashboard/dots.png" alt="edit">
-                                            </a>
 
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Notes</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
 
-                                <tr>
-                                    <td class="text-center">3</td>
-                                    <td class="purple-td">Human Body</td>
-                                    <td>Science</td>
-                                    <td>In Review</td>
-                                    <td class="text-center">17</td>
-                                    <td class="text-center">$978</td>
-                                    <td>11-10-2020, 01:00</td>
-                                    <td>11-10-2020, 01:00</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/Admin/images/Dashboard/dots.png" alt="edit">
-                                            </a>
 
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Notes</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="text-center">4</td>
-                                    <td class="purple-td">World War 2</td>
-                                    <td>History</td>
-                                    <td>Published</td>
-                                    <td class="text-center">28</td>
-                                    <td class="text-center">$15254</td>
-                                    <td>12-10-2020, 10:10</td>
-                                    <td>12-10-2020, 10:10</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/Admin/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Notes</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="text-center">5</td>
-                                    <td class="purple-td">Accounting</td>
-                                    <td>Account</td>
-                                    <td>Published</td>
-                                    <td class="text-center">0</td>
-                                    <td class="text-center">$69</td>
-                                    <td>13-10-2020, 11:25</td>
-                                    <td>NA</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/Admin/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Notes</a>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                </tr>
 
                             </tbody>
                         </table>

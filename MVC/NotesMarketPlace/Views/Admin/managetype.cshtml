@@ -2,27 +2,31 @@
 <html lang="en">
 
 <head>
+
+    <!-- Important Meta Tags -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Title -->
     <title>Manage Type - Notes MarketPlace</title>
 
-    <!-- favicon -->
+    <!-- Favicon -->
     <link rel="shortcut icon" href="~/Content/Admin/images/logo/favicon.ico">
 
-    <!-- GoogleFonts -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <!-- FontAwesome -->
     <link rel="stylesheet" href="~/Content/Admin/css/font-awesome/css/fontawesome.min.css">
 
-    <!-- FontAwesome link -->
+    <!-- FontAwesome kit -->
     <script src="https://kit.fontawesome.com/4fa77e6d3c.js" crossorigin="anonymous"></script>
 
-    <!-- Bootstrap -->
+    <!-- Bootstrap css -->
     <link rel="stylesheet" href="~/Content/Admin/css/bootstrap/bootstrap.min.css">
 
-    <!-- Customized css -->
+    <!-- Custom css -->
     <link rel="stylesheet" href="~/Content/Admin/css/style.css">
 
     <!-- Responsive css -->
@@ -31,6 +35,7 @@
 </head>
 
 <body>
+
     <section id="manage-type" class="admin-manage-page">
 
         <!-- Header -->
@@ -57,10 +62,10 @@
                                         <a role="button" id="notes-dropdown-lable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notes</a>
 
                                         <div class="dropdown-menu" aria-labelledby="notes-dropdown-lable">
-                                            <a class="dropdown-item" href="~/Admin/notesunderreview">Notes Under Review</a>
-                                            <a class="dropdown-item" href="~/Admin/publishednotes">Published Notes</a>
-                                            <a class="dropdown-item" href="~/Admin/downloadednotes">Downloaded Notes</a>
-                                            <a class="dropdown-item" href="~/Admin/rejectednotes">Rejected Notes</a>
+                                            <a class="dropdown-item" href="~/Admin/notesUnderReview">Notes Under Review</a>
+                                            <a class="dropdown-item" href="~/Admin/publishedNotes">Published Notes</a>
+                                            <a class="dropdown-item" href="~/Admin/downloadNotes">Downloaded Notes</a>
+                                            <a class="dropdown-item" href="~/Admin/rejectedNotes">Rejected Notes</a>
                                         </div>
                                     </div>
                                 </li>
@@ -72,7 +77,7 @@
                                         <a role="button" id="reports-dropdown-lable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reports</a>
 
                                         <div class="dropdown-menu" aria-labelledby="reports-dropdown-lable">
-                                            <a class="dropdown-item" href="~/Admin/spamreports">Spam Reports</a>
+                                            <a class="dropdown-item" href="~/Admin/spamReports">Spam Reports</a>
                                         </div>
                                     </div>
                                 </li>
@@ -81,25 +86,25 @@
                                         <a role="button" id="settings-dropdown-lable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
 
                                         <div class="dropdown-menu" aria-labelledby="settings-dropdown-lable">
-                                            <a class="dropdown-item" href="~/Admin/managesystemconfiguration">Manage System Configuration</a>
-                                            <a class="dropdown-item" href="~/Admin/manageadministrator">Manage Administrator</a>
-                                            <a class="dropdown-item" href="~/Admin/managecategory">Manage Category</a>
-                                            <a class="dropdown-item" href="~/Admin/managetype">Manage Type</a>
-                                            <a class="dropdown-item" href="~/Admin/managecountry">Manage Countries</a>
+                                            <a class="dropdown-item" href="~/Admin/manageSystemConfiguration">Manage System Configuration</a>
+                                            <a class="dropdown-item" href="~/Admin/manageAdministrator">Manage Administrator</a>
+                                            <a class="dropdown-item" href="~/Admin/manageCategory">Manage Category</a>
+                                            <a class="dropdown-item" href="~/Admin/manageType">Manage Type</a>
+                                            <a class="dropdown-item" href="~/Admin/manageCountry">Manage Countries</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li class="logged-in-user-photo-li">
                                     <div class="dropdown user-picture-dropdown">
-                                        <a href="~/Admin/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <div class="logged-in-user-photo">
-                                                <img src="~/Content/Admin/images/testimonial/customer-4.png" alt="User Photo" class="rounded-circle">
+                                                <img src="~/Content/Admin/images/testimonial/customer-1.png" alt="User Photo" class="rounded-circle">
                                             </div>
                                         </a>
 
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <a class="dropdown-item" href="~/Admin/myprofile">Update Profile</a>
-                                            <a class="dropdown-item" href="~/Admin/changepassword">Change Password</a>
+                                            <a class="dropdown-item" href="~/Admin/myProfile">Update Profile</a>
+                                            <a class="dropdown-item" href="~/Admin/changePassword">Change Password</a>
                                             <a class="dropdown-item logout-btn-dropdown" href="~/Admin/login">Logout</a>
                                         </div>
                                     </div>
@@ -127,10 +132,10 @@
                                         <a role="button" id="notes-dropdown-lable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notes</a>
 
                                         <div class="dropdown-menu" aria-labelledby="notes-dropdown-lable">
-                                            <a class="dropdown-item" href="~/Admin/notesunderreview">Notes Under Review</a>
-                                            <a class="dropdown-item" href="~/Admin/publishednotes">Published Notes</a>
-                                            <a class="dropdown-item" href="~/Admin/downloadednotes">Downloaded Notes</a>
-                                            <a class="dropdown-item" href="~/Admin/rejectednotes">Rejected Notes</a>
+                                            <a class="dropdown-item" href="~/Admin/notesUnderReview">Notes Under Review</a>
+                                            <a class="dropdown-item" href="~/Admin/publishedNotes">Published Notes</a>
+                                            <a class="dropdown-item" href="~/Admin/downloadNotes">Downloaded Notes</a>
+                                            <a class="dropdown-item" href="~/Admin/rejectedNotes">Rejected Notes</a>
                                         </div>
                                     </div>
                                 </li>
@@ -142,7 +147,7 @@
                                         <a role="button" id="reports-dropdown-lable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reports</a>
 
                                         <div class="dropdown-menu" aria-labelledby="reports-dropdown-lable">
-                                            <a class="dropdown-item" href="~/Admin/spamreports">Spam Reports</a>
+                                            <a class="dropdown-item" href="~/Admin/spamReports">Spam Reports</a>
                                         </div>
                                     </div>
                                 </li>
@@ -151,31 +156,31 @@
                                         <a role="button" id="settings-dropdown-lable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
 
                                         <div class="dropdown-menu" aria-labelledby="settings-dropdown-lable">
-                                            <a class="dropdown-item" href="~/Admin/managesystem-configuration">Manage System Configuration</a>
-                                            <a class="dropdown-item" href="~/Admin/manageadministrator">Manage Administrator</a>
-                                            <a class="dropdown-item" href="~/Admin/managecategory">Manage Category</a>
-                                            <a class="dropdown-item" href="~/Admin/managetype">Manage Type</a>
-                                            <a class="dropdown-item" href="~/Admin/managecountry">Manage Countries</a>
+                                            <a class="dropdown-item" href="~/Admin/manageSystemConfiguration">Manage System Configuration</a>
+                                            <a class="dropdown-item" href="~/Admin/manageAdministrator">Manage Administrator</a>
+                                            <a class="dropdown-item" href="~/Admin/manageCategory">Manage Category</a>
+                                            <a class="dropdown-item" href="~/Admin/manageType">Manage Type</a>
+                                            <a class="dropdown-item" href="~/Admin/manageCountry">Manage Countries</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li class="logged-in-user-photo-li">
                                     <div class="logged-in-user-photo">
                                         <div class="dropdown">
-                                            <a href="~/Admin/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img src="~/Content/Admin/images/testimonial/customer-4.png" alt="User Photo" class="rounded-circle">
+                                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img src="~/Content/Admin/images/testimonial/customer-1.png" alt="User Photo" class="rounded-circle">
                                             </a>
 
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="my-profile">Update Profile</a>
-                                                <a class="dropdown-item" href="change-password">Change Password</a>
-                                                <a class="dropdown-item logout-btn-dropdown" href="login">Logout</a>
+                                                <a class="dropdown-item" href="~/Admin/myProfile">Update Profile</a>
+                                                <a class="dropdown-item" href="~/Admin/changePassword">Change Password</a>
+                                                <a class="dropdown-item logout-btn-dropdown" href="~/Admin/login">Logout</a>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <a class="btn btn-general btn-purple" href="login" title="Download" role="button">Logout</a>
+                                    <a class="btn btn-general btn-purple" href="~/Admin/login" title="Download" role="button">Logout</a>
                                 </li>
                             </ul>
                         </div>
@@ -194,7 +199,7 @@
                     </div>
 
                     <div class="col-lg-5 col-md-5 col-sm-5 col-12">
-                        <button onclick="window.location.href='add-type.html'" class="btn btn-general btn-purple add-type-btn">Add Type</button>
+                        <button onclick="window.location.href='~/Views/Admin/addType.cshtml'" class="btn btn-general btn-purple add-type-btn">Add Type</button>
                     </div>
 
                     <div class="col-lg-7 col-md-7 col-sm-7 col-12">
@@ -211,6 +216,8 @@
                     </div>
                 </div>
             </div>
+
+            @{IEnumerable<NotesMarketPlace.Models.typeuser> tudetail = ViewBag.tulist;}
 
             <div class="container">
 
@@ -230,72 +237,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Val 1</td>
-                                    <td>Lorem Ipsum is simply dummy text</td>
-                                    <td>09-10-2020, 10:10</td>
-                                    <td>Khyati Patel</td>
-                                    <td class="text-center">Yes</td>
-                                    <td class="text-center">
-                                        <img class="edit-img-in-table" src="~/Content/Admin/images/Dashboard/edit.png" alt="edit">
-                                        <img class="delete-img-in-table" src="~/Content/Admin/images/Dashboard/delete.png" alt="edit">
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="text-center">2</td>
-                                    <td>Val 2</td>
-                                    <td>Lorem Ipsum is simply dummy text</td>
-                                    <td>10-10-2020, 04:45</td>
-                                    <td>Rahul Shah</td>
-                                    <td class="text-center">Yes</td>
-                                    <td class="text-center">
-                                        <img class="edit-img-in-table" src="~/Content/Admin/images/Dashboard/edit.png" alt="edit">
-                                        <img class="delete-img-in-table" src="~/Content/Admin/images/Dashboard/delete.png" alt="edit">
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="text-center">3</td>
-                                    <td>Val 3</td>
-                                    <td>Lorem Ipsum is simply dummy text</td>
-                                    <td>11-10-2020, 12:45</td>
-                                    <td>Suman Trivedi</td>
-                                    <td class="text-center">No</td>
-                                    <td class="text-center">
-                                        <img class="edit-img-in-table" src="~/Content/Admin/images/Dashboard/edit.png" alt="edit">
-                                        <img class="delete-img-in-table" src="~/Content/Admin/images/Dashboard/delete.png" alt="edit">
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="text-center">4</td>
-                                    <td>Val 4</td>
-                                    <td>Lorem Ipsum is simply dummy text</td>
-                                    <td>12-10-2020, 10:10</td>
-                                    <td>Raj Malhotra</td>
-                                    <td class="text-center">Yes</td>
-                                    <td class="text-center">
-                                        <img class="edit-img-in-table" src="~/Content/Admin/images/Dashboard/edit.png" alt="edit">
-                                        <img class="delete-img-in-table" src="~/Content/Admin/images/Dashboard/delete.png" alt="edit">
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="text-center">5</td>
-                                    <td>Val 5</td>
-                                    <td>Lorem Ipsum is simply dummy text</td>
-                                    <td>13-10-2020, 11:25</td>
-                                    <td>Niya Patel</td>
-                                    <td class="text-center">No</td>
-                                    <td class="text-center">
-                                        <img class="edit-img-in-table" src="~/Content/Admin/images/Dashboard/edit.png" alt="edit">
-                                        <img class="delete-img-in-table" src="~/Content/Admin/images/Dashboard/delete.png" alt="edit">
-                                    </td>
-                                </tr>
-
+                                @foreach (var i in tudetail)
+                                {
+                                    <tr>
+                                        <td class="text-center">@i.types.NoteTypeID</td>
+                                        <td>@i.types.TypeName</td>
+                                        <td>@i.types.Description</td>
+                                        <td>@i.types.CreatedDate.ToString()</td>
+                                        <td>@i.user.FirstName @i.user.LastName</td>
+                                        @if (@i.types.IsActive)
+                                        {
+                                            <td class="text-center">Yes</td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-center">No</td>
+                                        }
+                                        <td class="text-center">
+                                            <img class="edit-img-in-table" src="~/Content/Admin/images/Dashboard/edit.png" alt="edit">
+                                            <img class="delete-img-in-table" src="~/Content/Admin/images/Dashboard/delete.png" alt="delete">
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
 
@@ -347,14 +310,11 @@
 
     </section>
 
-    <!-- Java-scripts -->
 
     <!-- JQuery -->
     <script src="~/Scripts/Admin/js/jquery.js"></script>
 
     <!-- Production version -->
-    <!-- <script src="https://unpkg.com/@@popperjs/core@2"></script> -->
-
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
@@ -364,7 +324,7 @@
     <!-- Custom JS -->
     <script src="~/Scripts/Admin/js/script.js"></script>
 
-    <!-- Java-scripts -->
+
 </body>
 
 </html>

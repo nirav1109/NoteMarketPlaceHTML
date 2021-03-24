@@ -28,6 +28,16 @@
 
     <!-- Responsive css -->
     <link rel="stylesheet" href="~/Content/User/css/responsive.css">
+
+
+    <script>
+        function searchNote() {
+            
+            document.getElementById("searchForm").submit();
+
+        }
+    </script>
+
 </head>
 
 <body>
@@ -106,7 +116,8 @@
         <!-- general box -->
         <div class="general-box">
             <div class="content-box-lg">
-                <form method="post">
+                @using (Html.BeginForm("searchnotes", "User", FormMethod.Get, new { @Id = "searchForm" }))
+                {
                     <div class="container">
                         <div class="row">
                             <p class="box-heading">Search and Filter Notes</p>
@@ -119,13 +130,14 @@
 
                                 <div class="form-group has-search-bar">
                                     <span class="search-symbol"><img src="~/Content/User/images/Dashboard/search-icon.png" alt=""></span>
-                                    <input type="text" class="form-control input-box-style search-notes-bar" id="example" placeholder="Search notes here...">
+                                    <input type="text" name="search" class="form-control input-box-style search-notes-bar" id="example" placeholder="Search notes here...">
                                 </div>
 
                                 <div class="row">
+
                                     <div class="col-md-2 col-sm-4 padding-right-0">
                                         <div class="form-group">
-                                            @Html.DropDownListFor(x => x.NoteTypeID, new SelectList(ViewBag.notetypes, "Value", "Text"), "Select Your Type", new { @class = "form-control input-box-style", id = "exampleFormControlSelect1" })
+                                            @Html.DropDownListFor(x => x.NoteTypeID, new SelectList(ViewBag.notetypes, "Value", "Text"), "Select Your Type", new { @onchange = "searchNote()", @class = "form-control input-box-style", id = "exampleFormControlSelect1" })
 
                                             <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
                                         </div>
@@ -133,28 +145,28 @@
 
                                     <div class="col-md-2 col-sm-4 padding-right-0">
                                         <div class="form-group">
-                                            @Html.DropDownListFor(x => x.NoteCategoryID, new SelectList(ViewBag.notecategoies, "Value", "Text"), "Select Your category", new { @class = "form-control input-box-style", id = "exampleFormControlSelect1" })
+                                            @Html.DropDownListFor(x => x.NoteCategoryID, new SelectList(ViewBag.notecategoies, "Value", "Text"), "Select Your category", new {  @onchange = "searchNote()", @class = "form-control input-box-style", id = "exampleFormControlSelect1" })
                                             <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-2 col-sm-4 padding-right-0">
                                         <div class="form-group">
-                                            @Html.DropDownListFor(x => x.UniversityInformation, new SelectList(ViewBag.universities, "Value", "Text"), "Select Your University", new { @class = "form-control input-box-style", id = "exampleFormControlSelect1" })
+                                            @Html.DropDownListFor(x => x.UniversityInformation, new SelectList(ViewBag.universities, "Value", "Text"), "Select Your University", new { @onchange = "searchNote()", @class = "form-control input-box-style", id = "exampleFormControlSelect1" })
                                             <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-2 col-sm-4 padding-right-0">
                                         <div class="form-group">
-                                            @Html.DropDownListFor(x => x.Course, new SelectList(ViewBag.courses, "Value", "Text"), "Select Your Course", new { @class = "form-control input-box-style", id = "exampleFormControlSelect1" })
+                                            @Html.DropDownListFor(x => x.Course, new SelectList(ViewBag.courses, "Value", "Text"), "Select Your Course", new { @onchange = "searchNote()", @class = "form-control input-box-style", id = "exampleFormControlSelect1" })
                                             <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-2 col-sm-4 padding-right-0">
                                         <div class="form-group">
-                                            @Html.DropDownListFor(x => x.CountryID, new SelectList(ViewBag.countries, "Value", "Text"), "Select Your Country", new { @class = "form-control input-box-style", id = "exampleFormControlSelect1" })
+                                            @Html.DropDownListFor(x => x.CountryID, new SelectList(ViewBag.countries, "Value", "Text"), "Select Your Country", new { @onchange = "searchNote()", @class = "form-control input-box-style", id = "exampleFormControlSelect1" })
                                             <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
                                         </div>
                                     </div>
@@ -171,323 +183,88 @@
                                             <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
                                         </div>
                                     </div>
+
                                 </div>
 
                             </div>
                         </div>
                     </div>
-
+                }
             </div>
         </div>
         <!-- general-box -->
         <!-- general box -->
         <div class="general-box searched-notes-box">
             <div class="content-box-lg">
-
+                @{
+                    IEnumerable<NotesMarketPlace.Models.nd> seachedNote = ViewBag.filterNotes;
+                   
+                }
                 <div class="container">
                     <div class="row">
-                        <p class="box-heading">Total 18 Notes</p>
+                        <p class="box-heading">Total @ViewBag.nd Notes</p>
                     </div>
                 </div>
 
                 <div class="container">
                     <div class="row">
 
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="note-details-box">
-                                <img src="~/Content/User/images/Search/1.jpg" alt="">
-                                <div class="note-details">
-                                    <p class="note-name-title"> @ViewBag.notecategoies as </p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/university.png" alt=""></span>University of California, US</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/pages.png" alt=""></span>204 Pages</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/date.png" alt=""></span>Thu, Nov 26 2020</p>
-                                    <p class="note-info-with-icon red-text"><span><img src="~/Content/User/images/Search/flag.png" alt=""></span>5 Users marked this note as inappropriate</p>
 
-                                    <div class="notes-rating">
-                                        <div class="col-md-7 col-sm-8 col-8">
-                                            <div class="rate">
-                                                <input type="radio" id="star5" name="rate" value="5" />
-                                                <label for="star5" title="text">5 stars</label>
-                                                <input type="radio" id="star4" name="rate" value="4" />
-                                                <label for="star4" title="text">4 stars</label>
-                                                <input type="radio" id="star3" name="rate" value="3" />
-                                                <label for="star3" title="text">3 stars</label>
-                                                <input type="radio" id="star2" name="rate" value="2" />
-                                                <label for="star2" title="text">2 stars</label>
-                                                <input type="radio" id="star1" name="rate" value="1" />
-                                                <label for="star1" title="text">1 star</label>
+
+                        @foreach (var i in seachedNote)
+                        {
+                           
+
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+
+                                <div class="note-details-box">
+                                    <img src="@Url.Content(@i.note.DisplayPicture)" alt="">
+                                    <div class="note-details">
+                                        <a href="/User/notedetail/@i.note.NoteID">
+                                            <p class="note-name-title"> @i.note.NoteTitle </p>
+                                        </a>
+                                        <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/university.png" alt=""></span>@i.note.UniversityInformation, @i.countryname.CountryName</p>
+                                        <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/pages.png" alt=""></span>@i.note.NumberOfPages Pages</p>
+                                        <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/date.png" alt=""></span>@i.note.PublishedDate</p>
+                                        <p class="note-info-with-icon red-text"><span><img src="~/Content/User/images/Search/flag.png" alt=""></span>5 Users marked this note as inappropriate</p>
+
+                                        <div class="notes-rating">
+                                            <div class="col-md-7 col-sm-8 col-8">
+                                                <div class="rate">
+                                                    <input type="radio" id="star5" name="rate" value="5" />
+                                                    <label for="star5" title="text">5 stars</label>
+                                                    <input type="radio" id="star4" name="rate" value="4" />
+                                                    <label for="star4" title="text">4 stars</label>
+                                                    <input type="radio" id="star3" name="rate" value="3" />
+                                                    <label for="star3" title="text">3 stars</label>
+                                                    <input type="radio" id="star2" name="rate" value="2" />
+                                                    <label for="star2" title="text">2 stars</label>
+                                                    <input type="radio" id="star1" name="rate" value="1" />
+                                                    <label for="star1" title="text">1 star</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-5 col-sm-4 col-4">
-                                            <p class="review-count">100 reviews</p>
+                                            <div class="col-md-5 col-sm-4 col-4">
+                                                <p class="review-count">100 reviews</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="note-details-box">
-                                <img src="~/Content/User/images/Search/2.jpg" alt="">
-                                <div class="note-details">
-                                    <p class="note-name-title">Computer Science - The complete reference</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/university.png" alt=""></span>University of California, US</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/pages.png" alt=""></span>204 Pages</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/date.png" alt=""></span>Thu, Nov 26 2020</p>
-                                    <p class="note-info-with-icon red-text"><span><img src="~/Content/User/images/Search/flag.png" alt=""></span>5 Users marked this note as inappropriate</p>
-                                    <div class="notes-rating">
-                                        <div class="col-md-7 col-sm-8 col-8">
-                                            <div class="rate">
-                                                <input type="radio" id="star5" name="rate" value="5" />
-                                                <label for="star5" title="text">5 stars</label>
-                                                <input type="radio" id="star4" name="rate" value="4" />
-                                                <label for="star4" title="text">4 stars</label>
-                                                <input type="radio" id="star3" name="rate" value="3" />
-                                                <label for="star3" title="text">3 stars</label>
-                                                <input type="radio" id="star2" name="rate" value="2" />
-                                                <label for="star2" title="text">2 stars</label>
-                                                <input type="radio" id="star1" name="rate" value="1" />
-                                                <label for="star1" title="text">1 star</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5 col-sm-4 col-4">
-                                            <p class="review-count">100 reviews</p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="note-details-box">
-                                <img src="~/Content/User/images/Search/3.jpg" alt="">
-                                <div class="note-details">
-                                    <p class="note-name-title">Basic Computer Engineering Tech India Publication Series</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/university.png" alt=""></span>University of California, US</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/pages.png" alt=""></span>204 Pages</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/date.png" alt=""></span>Thu, Nov 26 2020</p>
-                                    <p class="note-info-with-icon red-text"><span><img src="~/Content/User/images/Search/flag.png" alt=""></span>5 Users marked this note as inappropriate</p>
-                                    <div class="notes-rating">
-                                        <div class="col-md-7 col-sm-8 col-8">
-                                            <div class="rate">
-                                                <input type="radio" id="star5" name="rate" value="5" />
-                                                <label for="star5" title="text">5 stars</label>
-                                                <input type="radio" id="star4" name="rate" value="4" />
-                                                <label for="star4" title="text">4 stars</label>
-                                                <input type="radio" id="star3" name="rate" value="3" />
-                                                <label for="star3" title="text">3 stars</label>
-                                                <input type="radio" id="star2" name="rate" value="2" />
-                                                <label for="star2" title="text">2 stars</label>
-                                                <input type="radio" id="star1" name="rate" value="1" />
-                                                <label for="star1" title="text">1 star</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5 col-sm-4 col-4">
-                                            <p class="review-count">100 reviews</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        }
 
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="note-details-box">
-                                <img src="~/Content/User/images/Search/4.jpg" alt="">
-                                <div class="note-details">
-                                    <p class="note-name-title">Computer Science - The complete reference - Seventh Edition</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/university.png" alt=""></span>University of California, US</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/pages.png" alt=""></span>204 Pages</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/date.png" alt=""></span>Thu, Nov 26 2020</p>
-                                    <p class="note-info-with-icon red-text"><span><img src="~/Content/User/images/Search/flag.png" alt=""></span>5 Users marked this note as inappropriate</p>
-                                    <div class="notes-rating">
-                                        <div class="col-md-7 col-sm-8 col-8">
-                                            <div class="rate">
-                                                <input type="radio" id="star5" name="rate" value="5" />
-                                                <label for="star5" title="text">5 stars</label>
-                                                <input type="radio" id="star4" name="rate" value="4" />
-                                                <label for="star4" title="text">4 stars</label>
-                                                <input type="radio" id="star3" name="rate" value="3" />
-                                                <label for="star3" title="text">3 stars</label>
-                                                <input type="radio" id="star2" name="rate" value="2" />
-                                                <label for="star2" title="text">2 stars</label>
-                                                <input type="radio" id="star1" name="rate" value="1" />
-                                                <label for="star1" title="text">1 star</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5 col-sm-4 col-4">
-                                            <p class="review-count">100 reviews</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="note-details-box">
-                                <img src="~/Content/User/images/Search/5.jpg" alt="">
-                                <div class="note-details">
-                                    <p class="note-name-title">Computer Operating System - Final Exam Book With Paper Solution</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/university.png" alt=""></span>University of California, US</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/pages.png" alt=""></span>204 Pages</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/date.png" alt=""></span>Thu, Nov 26 2020</p>
-                                    <p class="note-info-with-icon red-text"><span><img src="~/Content/User/images/Search/flag.png" alt=""></span>5 Users marked this note as inappropriate</p>
-                                    <div class="notes-rating">
-                                        <div class="col-md-7 col-sm-8 col-8">
-                                            <div class="rate">
-                                                <input type="radio" id="star5" name="rate" value="5" />
-                                                <label for="star5" title="text">5 stars</label>
-                                                <input type="radio" id="star4" name="rate" value="4" />
-                                                <label for="star4" title="text">4 stars</label>
-                                                <input type="radio" id="star3" name="rate" value="3" />
-                                                <label for="star3" title="text">3 stars</label>
-                                                <input type="radio" id="star2" name="rate" value="2" />
-                                                <label for="star2" title="text">2 stars</label>
-                                                <input type="radio" id="star1" name="rate" value="1" />
-                                                <label for="star1" title="text">1 star</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5 col-sm-4 col-4">
-                                            <p class="review-count">100 reviews</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="note-details-box">
-                                <img src="~/Content/User/images/Search/6.jpg" alt="">
-                                <div class="note-details">
-                                    <p class="note-name-title">Computer Science - The complete reference</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/university.png" alt=""></span>University of California, US</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/pages.png" alt=""></span>204 Pages</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/date.png" alt=""></span>Thu, Nov 26 2020</p>
-                                    <p class="note-info-with-icon red-text"><span><img src="~/Content/User/images/Search/flag.png" alt=""></span>5 Users marked this note as inappropriate</p>
-                                    <div class="notes-rating">
-                                        <div class="col-md-7 col-sm-8 col-8">
-                                            <div class="rate">
-                                                <input type="radio" id="star5" name="rate" value="5" />
-                                                <label for="star5" title="text">5 stars</label>
-                                                <input type="radio" id="star4" name="rate" value="4" />
-                                                <label for="star4" title="text">4 stars</label>
-                                                <input type="radio" id="star3" name="rate" value="3" />
-                                                <label for="star3" title="text">3 stars</label>
-                                                <input type="radio" id="star2" name="rate" value="2" />
-                                                <label for="star2" title="text">2 stars</label>
-                                                <input type="radio" id="star1" name="rate" value="1" />
-                                                <label for="star1" title="text">1 star</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5 col-sm-4 col-4">
-                                            <p class="review-count">100 reviews</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="note-details-box">
-                                <img src="~/Content/User/images/Search/1.jpg" alt="">
-                                <div class="note-details">
-                                    <p class="note-name-title">Basic Computer Engineering Tech India Publication Series</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/university.png" alt=""></span>University of California, US</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/pages.png" alt=""></span>204 Pages</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/date.png" alt=""></span>Thu, Nov 26 2020</p>
-                                    <p class="note-info-with-icon red-text"><span><img src="~/Content/User/images/Search/flag.png" alt=""></span>5 Users marked this note as inappropriate</p>
-                                    <div class="notes-rating">
-                                        <div class="col-md-7 col-sm-8 col-8">
-                                            <div class="rate">
-                                                <input type="radio" id="star5" name="rate" value="5" />
-                                                <label for="star5" title="text">5 stars</label>
-                                                <input type="radio" id="star4" name="rate" value="4" />
-                                                <label for="star4" title="text">4 stars</label>
-                                                <input type="radio" id="star3" name="rate" value="3" />
-                                                <label for="star3" title="text">3 stars</label>
-                                                <input type="radio" id="star2" name="rate" value="2" />
-                                                <label for="star2" title="text">2 stars</label>
-                                                <input type="radio" id="star1" name="rate" value="1" />
-                                                <label for="star1" title="text">1 star</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5 col-sm-4 col-4">
-                                            <p class="review-count">100 reviews</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="note-details-box">
-                                <img src="~/Content/User/images/Search/2.jpg" alt="">
-                                <div class="note-details">
-                                    <p class="note-name-title">Computer Operating System - Final Exam Book With Paper Solution</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/university.png" alt=""></span>University of California, US</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/pages.png" alt=""></span>204 Pages</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/date.png" alt=""></span>Thu, Nov 26 2020</p>
-                                    <p class="note-info-with-icon red-text"><span><img src="~/Content/User/images/Search/flag.png" alt=""></span>5 Users marked this note as inappropriate</p>
-                                    <div class="notes-rating">
-                                        <div class="col-md-7 col-sm-8 col-8">
-                                            <div class="rate">
-                                                <input type="radio" id="star5" name="rate" value="5" />
-                                                <label for="star5" title="text">5 stars</label>
-                                                <input type="radio" id="star4" name="rate" value="4" />
-                                                <label for="star4" title="text">4 stars</label>
-                                                <input type="radio" id="star3" name="rate" value="3" />
-                                                <label for="star3" title="text">3 stars</label>
-                                                <input type="radio" id="star2" name="rate" value="2" />
-                                                <label for="star2" title="text">2 stars</label>
-                                                <input type="radio" id="star1" name="rate" value="1" />
-                                                <label for="star1" title="text">1 star</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5 col-sm-4 col-4">
-                                            <p class="review-count">100 reviews</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="note-details-box">
-                                <img src="~/Content/User/images/Search/3.jpg" alt="">
-                                <div class="note-details">
-                                    <p class="note-name-title">Computer Operating System - Final Exam Book With Paper Solution</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/university.png" alt=""></span>University of California, US</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/pages.png" alt=""></span>204 Pages</p>
-                                    <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/date.png" alt=""></span>Thu, Nov 26 2020</p>
-                                    <p class="note-info-with-icon red-text"><span><img src="~/Content/User/images/Search/flag.png" alt=""></span>5 Users marked this note as inappropriate</p>
-                                    <div class="notes-rating">
-                                        <div class="col-md-7 col-sm-8 col-8">
-                                            <div class="rate">
-                                                <input type="radio" id="star5" name="rate" value="5" />
-                                                <label for="star5" title="text">5 stars</label>
-                                                <input type="radio" id="star4" name="rate" value="4" />
-                                                <label for="star4" title="text">4 stars</label>
-                                                <input type="radio" id="star3" name="rate" value="3" />
-                                                <label for="star3" title="text">3 stars</label>
-                                                <input type="radio" id="star2" name="rate" value="2" />
-                                                <label for="star2" title="text">2 stars</label>
-                                                <input type="radio" id="star1" name="rate" value="1" />
-                                                <label for="star1" title="text">1 star</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5 col-sm-4 col-4">
-                                            <p class="review-count">100 reviews</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
                 </div>
 
             </div>
         </div>
-        </form>
+        
         <!-- general box -->
         <!-- pagination -->
         <nav aria-label="Page navigation example">

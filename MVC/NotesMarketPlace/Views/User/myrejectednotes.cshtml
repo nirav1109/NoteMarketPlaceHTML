@@ -144,6 +144,12 @@
         <!-- my downloads table -->
         <div class="content-box-lg">
 
+            @{
+                IEnumerable<NotesMarketPlace.Models.AllProgressNotes> RejectedNotes = ViewBag.rejectedNote;
+                int s = 0;
+
+             }
+
             <div class="container">
                 <div class="row no-gutters">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-left box-heading-wrapper">
@@ -177,200 +183,33 @@
                                     <th scope="col">category</th>
                                     <th scope="col">Remarks</th>
                                     <th scope="col">Clone</th>
-                                    <th scope="col" width="80px"></th>
+                                    <th scope="col" width="80px">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach (var i in RejectedNotes)
+                                {
+                                    s++;
 
-                                <tr>
-                                    <td>1</td>
-                                    <td class="purple-td">Data Science</td>
-                                    <td>Science</td>
-                                    <td>Lorem ipsum is dummy text</td>
-                                    <td class="purple-td">Clone</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
+                                    <tr>
+                                        <td>@s</td>
+                                        <td class="purple-td">@i.SellerNotes.NoteTitle</td>
+                                        <td>@i.Category.CategoryName</td>
+                                        <td>@i.SellerNotes.AdminRemarks</td>
+                                        <td class="purple-td">Clone</td>
+                                        <td class="text-center visible-overflow-for-dropdown">
+                                            <div class="dropdown dropdown-dots-table">
+                                                <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
+                                                </a>
 
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    <a class="dropdown-item" href="#">Download Note</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>2</td>
-                                    <td class="purple-td">Accounts</td>
-                                    <td>Commerce</td>
-                                    <td>Lorem ipsum is dummy text</td>
-                                    <td class="purple-td">Clone</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td class="purple-td">Social Study</td>
-                                    <td>Social</td>
-                                    <td>Lorem ipsum is dummy text</td>
-                                    <td class="purple-td">Clone</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>4</td>
-                                    <td class="purple-td">AI</td>
-                                    <td>IT</td>
-                                    <td>Lorem ipsum is dummy text</td>
-                                    <td class="purple-td">Clone</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>5</td>
-                                    <td class="purple-td">Lorem ipsum</td>
-                                    <td>Lorem</td>
-                                    <td>Lorem ipsum is dummy text</td>
-                                    <td class="purple-td">Clone</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>6</td>
-                                    <td class="purple-td">Data Science</td>
-                                    <td>Science</td>
-                                    <td>Lorem ipsum is dummy text</td>
-                                    <td class="purple-td">Clone</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>7</td>
-                                    <td class="purple-td">Accounts</td>
-                                    <td>Commerce</td>
-                                    <td>Lorem ipsum is dummy text</td>
-                                    <td class="purple-td">Clone</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>8</td>
-                                    <td class="purple-td">Social Study</td>
-                                    <td>Social</td>
-                                    <td>Lorem ipsum is dummy text</td>
-                                    <td class="purple-td">Clone</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>9</td>
-                                    <td class="purple-td">AI</td>
-                                    <td>IT</td>
-                                    <td>Lorem ipsum is dummy text</td>
-                                    <td class="purple-td">Clone</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>10</td>
-                                    <td class="purple-td">Lorem ipsum</td>
-                                    <td>Lorem</td>
-                                    <td>Lorem ipsum is dummy text</td>
-                                    <td class="purple-td">Clone</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                }
 
                             </tbody>
                         </table>

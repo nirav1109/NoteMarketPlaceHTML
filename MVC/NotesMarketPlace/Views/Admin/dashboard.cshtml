@@ -203,21 +203,21 @@
 
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                         <div class="notes-in-review-for-publish dashboard-single-box">
-                            <p class="dashboard-single-detail">20</p>
+                            <p class="dashboard-single-detail">@ViewBag.NoteUnderReview</p>
                             <p class="dashboard-single-detail-inst">Numbers of Notes in Review for Publish</p>
                         </div>
                     </div>
 
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                         <div class="new-notes-downloaded dashboard-single-box">
-                            <p class="dashboard-single-detail">103</p>
+                            <p class="dashboard-single-detail">@ViewBag.LastDownLoadedNote </p>
                             <p class="dashboard-single-detail-inst">Numbers of New Notes Downloaded (Last 7 days)</p>
                         </div>
                     </div>
 
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                         <div class="new-registration dashboard-single-box">
-                            <p class="dashboard-single-detail">223</p>
+                            <p class="dashboard-single-detail">@ViewBag.LastRegisteredUsers</p>
                             <p class="dashboard-single-detail-inst">Numbers of New Registrations (Last 7 days)</p>
                         </div>
                     </div>
@@ -260,7 +260,11 @@
                     </div>
                 </div>
             </div>
-
+            @{
+                IEnumerable<NotesMarketPlace.Models.AllProgressNotes> pndetail = ViewBag.publishednotes;
+                int s = 0;
+                int count = 0;
+                }
             <div class="container">
 
                 <div class="dashboard-published-notes-table general-table-responsive">
@@ -282,131 +286,37 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach (var i in pndetail)
+                                {
+                                   
+                                    s++;
+                                    
+                                   
+                                    <tr>
+                                        <td>@s</td>
+                                        <td class="purple-td">@i.SellerNotes.NoteTitle</td>
+                                        <td>@i.Category.CategoryName</td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center">@i.SellerNotes.SellType</td>
+                                        <td>$@i.SellerNotes.SellPrice</td>
+                                        <td>@i.user.FirstName @i.user.LastName</td>
+                                        <td>@i.SellerNotes.ModifiedDate</td>
+                                        <td class="purple-td text-center">@count</td>
+                                        <td class="text-center visible-overflow-for-dropdown">
+                                            <div class="dropdown dropdown-dots-table">
+                                                <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img class="dots-in-table" src="~/Content/Admin/images/Dashboard/dots.png" alt="edit">
+                                                </a>
 
-                                <tr>
-                                    <td>1</td>
-                                    <td class="purple-td">Data Science</td>
-                                    <td>Science</td>
-                                    <td class="text-center">10 KB</td>
-                                    <td class="text-center">Paid</td>
-                                    <td>$0</td>
-                                    <td>Pritesh Panchal</td>
-                                    <td>09-10-2020, 10:10</td>
-                                    <td class="purple-td text-center">10</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/Admin/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                                <a class="dropdown-item" href="#">View More Details</a>
-                                                <a class="dropdown-item" href="#">Unpublish</a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    <a class="dropdown-item" href="#">Download Note</a>
+                                                    <a class="dropdown-item" href="#">View More Details</a>
+                                                    <a class="dropdown-item" href="#">Unpublish</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>2</td>
-                                    <td class="purple-td">Accounts</td>
-                                    <td>Commerce</td>
-                                    <td class="text-center">23 MB</td>
-                                    <td class="text-center">Free</td>
-                                    <td>$22</td>
-                                    <td>Rahil Shah</td>
-                                    <td>10-10-2020, 12:30</td>
-                                    <td class="purple-td text-center">21</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/Admin/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                                <a class="dropdown-item" href="#">View More Details</a>
-                                                <a class="dropdown-item" href="#">Unpublish</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td class="purple-td">Social Study</td>
-                                    <td>Social</td>
-                                    <td class="text-center">3 MB</td>
-                                    <td class="text-center">Free</td>
-                                    <td>$56</td>
-                                    <td>Anish Patel</td>
-                                    <td>11-10-2020, 01:00</td>
-                                    <td class="purple-td text-center">13</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/Admin/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                                <a class="dropdown-item" href="#">View More Details</a>
-                                                <a class="dropdown-item" href="#">Unpublish</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>4</td>
-                                    <td class="purple-td">AI</td>
-                                    <td>IT</td>
-                                    <td class="text-center">1 MB</td>
-                                    <td class="text-center">Paid</td>
-                                    <td>$0</td>
-                                    <td>Vijay Vaishnav</td>
-                                    <td>12-10-2020, 10:10</td>
-                                    <td class="purple-td text-center">34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/Admin/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                                <a class="dropdown-item" href="#">View More Details</a>
-                                                <a class="dropdown-item" href="#">Unpublish</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>5</td>
-                                    <td class="purple-td">Lorem ipsum</td>
-                                    <td>Lorem</td>
-                                    <td class="text-center">105 KB</td>
-                                    <td class="text-center">Free</td>
-                                    <td>$90</td>
-                                    <td>Mehul Patel</td>
-                                    <td>13-10-2020, 11:25</td>
-                                    <td class="purple-td text-center">9</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/Admin/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                                <a class="dropdown-item" href="#">View More Details</a>
-                                                <a class="dropdown-item" href="#">Unpublish</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                }
 
                             </tbody>
                         </table>

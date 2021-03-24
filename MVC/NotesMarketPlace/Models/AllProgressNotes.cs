@@ -9,7 +9,15 @@ namespace NotesMarketPlace.Models
     {
         public NoteDetails SellerNotes { get; set; }
         public NoteCategories Category { get; set; }
-        public NoteStatus Status { get; set; }
+        public NoteStatus status { get; set; }
+        public Users user { get; set; }
+        public DownloadNotes downloadNote { get; set; }
+        public SellerNoteAttachment Attachmnet { get; set; }
+        public UserProfile uprofiledata { get; set; }
+        public Countries country { get; set;}
+
+       
+        public NoteReviews notereview { get; set; }
     }
 
     public class AllPublishNotes
@@ -43,5 +51,12 @@ namespace NotesMarketPlace.Models
     {
         public NoteDetails note { get; set; }
         public SpamReports spamrpt { get; set; }
+    }
+    public class typeuser
+    {
+        public NoteType types { get; set; }
+        public NoteCategories categorydata { get; set; }
+        public Countries countrydata { get; set; }
+        public Users user { get; set; }
     }
 }

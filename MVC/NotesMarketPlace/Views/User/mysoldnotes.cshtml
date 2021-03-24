@@ -143,7 +143,10 @@
 
         <!-- my downloads table -->
         <div class="content-box-lg">
-
+            @{ 
+                IEnumerable<NotesMarketPlace.Models.AllProgressNotes> SoldNote = ViewBag.mysoldnotes;
+                int s = 0;
+            }
             <div class="container">
                 <div class="row no-gutters">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-left box-heading-wrapper">
@@ -183,236 +186,35 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach (var i in SoldNote)
+                                {
+                                    s++;
 
-                                <tr>
-                                    <td>1</td>
-                                    <td class="purple-td">Data Science</td>
-                                    <td>Science</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Paid</td>
-                                    <td>$250</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
+                                    <tr>
+                                        <td>@s</td>
+                                        <td class="purple-td">@i.SellerNotes.NoteTitle</td>
+                                        <td>@i.Category.CategoryName</td>
+                                        <td>@i.user.EmailID</td>
+                                        <td>@i.SellerNotes.SellType</td>
+                                        <td>$@i.SellerNotes.SellPrice</td>
+                                        <td>27 Nov 2020, 11:24:34</td>
+                                        <td class="text-center visible-overflow-for-dropdown">
+                                            <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
 
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
+                                            <div class="dropdown dropdown-dots-table">
+                                                <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
+                                                </a>
 
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    <a class="dropdown-item" href="#">Download Note</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                }
 
-                                <tr>
-                                    <td>2</td>
-                                    <td class="purple-td">Accounts</td>
-                                    <td>Commerce</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Free</td>
-                                    <td>$0</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
 
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td class="purple-td">Social Study</td>
-                                    <td>Social</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Free</td>
-                                    <td>$0</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
-
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>4</td>
-                                    <td class="purple-td">AI</td>
-                                    <td>IT</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Paid</td>
-                                    <td>$158</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
-
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>5</td>
-                                    <td class="purple-td">Lorem ipsum</td>
-                                    <td>Lorem</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Free</td>
-                                    <td>$555</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
-
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>6</td>
-                                    <td class="purple-td">Data Science</td>
-                                    <td>Science</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Paid</td>
-                                    <td>$0</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
-
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>7</td>
-                                    <td class="purple-td">Accounts</td>
-                                    <td>Commerce</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Free</td>
-                                    <td>$0</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
-
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>8</td>
-                                    <td class="purple-td">Social Study</td>
-                                    <td>Social</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Free</td>
-                                    <td>$0</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
-
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>9</td>
-                                    <td class="purple-td">AI</td>
-                                    <td>IT</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Paid</td>
-                                    <td>$250</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
-
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>10</td>
-                                    <td class="purple-td">Lorem ipsum</td>
-                                    <td>Lorem</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Free</td>
-                                    <td>$115</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
-
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
 
                             </tbody>
                         </table>

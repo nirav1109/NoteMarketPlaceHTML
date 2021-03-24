@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model NotesMarketPlace.Models.NoteType
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -195,19 +196,21 @@
 
                 <div class="container">
                     <div class="row">
-                        <form>
+                        <form method="post">
                             <div class="row">
 
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
 
                                     <div class="form-group">
-                                        <label class="info-label" for="exampleInputEmail1">Type *</label>
-                                        <input type="text" class="form-control input-box-style" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your type">
+                                        <label class="info-label" for="type">Type *</label>
+                                       @Html.TextBoxFor(x=>x.TypeName,new {@class="form-control input-box-style",placeholder="Enter your type",id="type" })
+                                        
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="info-label" for="category-description">Description *</label>
-                                        <textarea class="form-control input-box-style" id="category-description" placeholder="Enter your description..."></textarea>
+                                        <label class="info-label" for="">Description *</label>
+                                        @Html.TextAreaFor(x=>x.Description,new {@class="form-control input-box-style" ,id="category-description",placeholder="Enter your description..."})
+                                        
                                     </div>
 
                                     <div class="form-btn">

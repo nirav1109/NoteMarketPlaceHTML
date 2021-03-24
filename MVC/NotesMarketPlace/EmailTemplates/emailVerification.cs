@@ -11,7 +11,7 @@ namespace NotesMarketPlace.EmailTemplates
     {
         public static void SendVerifyLinkEmail(Users objUser, string activationlink)
         {
-            var fromEmail = new MailAddress("supportedemail", "Notes Marketplace"); //need system email
+            var fromEmail = new MailAddress("supportedEmail", "Notes Marketplace"); //need system email
             var toEmail = new MailAddress(objUser.EmailID);
             var fromEmailPassword = "Password"; // Replace with actual password
             string subject = "Notes Marketplace - Email Verification";

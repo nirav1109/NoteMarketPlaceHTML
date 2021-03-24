@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model NotesMarketPlace.Models.NoteReviews
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -27,6 +28,36 @@
 
     <!-- Responsive css -->
     <link rel="stylesheet" href="~/Content/User/css/responsive.css">
+
+    <!-- Script for star-->
+    <script type="text/javascript">
+        function FillOut(rating) {
+            for (var i = 1; i <= rating; i++) {
+                $("#s" + i).attr('class', 'text-muted fa fa-star');
+            }
+        }
+        function FillOver(rating) {
+            for (var i = 1; i <= rating; i++) {
+                $("#s" + i).attr('class', 'text-warning fa fa-star');
+            }
+        }
+        function FillClick(rating) {
+            $("#lblRating").val(rating);
+            for (var i = 1; i <= rating; i++) {
+                $("#s" + i).attr('class', 'text-warning fa fa-star');
+            }
+            for (var i = rating + 1; i <= 5; i++) {
+                $("#s" + i).attr('class', 'text-muted fa fa-star');
+            }
+        }
+        function FillSelected() {
+            var rating = $("#lblRating").val();
+            for (var i = 1; i <= rating; i++) {
+                $("#s" + i).attr('class', 'text-warning fa fa-star');
+            }
+        }
+
+/**/</script>
 
 </head>
 
@@ -73,12 +104,12 @@
                                         </a>
 
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <a class="dropdown-item" href="user-profile">My Profile</a>
-                                            <a class="dropdown-item active" href="my-downloads">My Downloads</a>
-                                            <a class="dropdown-item" href="my-sold-notes">My Sold Notes</a>
-                                            <a class="dropdown-item" href="my-rejected-notes">My Rejected Notes</a>
-                                            <a class="dropdown-item" href="change-password">Change Password</a>
-                                            <a class="dropdown-item logout-btn-dropdown" href="login">Logout</a>
+                                            <a class="dropdown-item" href="~/User/userprofile">My Profile</a>
+                                            <a class="dropdown-item active" href="~/User/mydownloads">My Downloads</a>
+                                            <a class="dropdown-item" href="~/User/mysoldnotes">My Sold Notes</a>
+                                            <a class="dropdown-item" href="~/User/myrejectednotes">My Rejected Notes</a>
+                                            <a class="dropdown-item" href="~/User/changepassword">Change Password</a>
+                                            <a class="dropdown-item logout-btn-dropdown" href="~/User/logout">Logout</a>
                                         </div>
                                     </div>
                                 </li>
@@ -113,22 +144,22 @@
                                     <a href="~/User/contactus">Contact Us</a>
                                 </li>
                                 <li class=" logged-in-user-photo-li">
-                                        <div class="logged-in-user-photo">
-                                            <div class="dropdown">
-                                                <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <img src="~/Content/User/images/testimonial/customer-4.png" alt="User Photo" class="rounded-circle">
-                                                </a>
+                                    <div class="logged-in-user-photo">
+                                        <div class="dropdown">
+                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img src="~/Content/User/images/testimonial/customer-4.png" alt="User Photo" class="rounded-circle">
+                                            </a>
 
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <a class="dropdown-item" href="~/User/userprofile">My Profile</a>
-                                                    <a class="dropdown-item active" href="~/User/mydownloads">My Downloads</a>
-                                                    <a class="dropdown-item" href="~/User/mysoldnotes">My Sold Notes</a>
-                                                    <a class="dropdown-item" href="~/User/myrejectednotes">My Rejected Notes</a>
-                                                    <a class="dropdown-item" href="~/User/changepassword">Change Password</a>
-                                                    <a class="dropdown-item logout-btn-dropdown" href="~/User/login">Logout</a>
-                                                </div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <a class="dropdown-item" href="~/User/userprofile">My Profile</a>
+                                                <a class="dropdown-item active" href="~/User/mydownloads">My Downloads</a>
+                                                <a class="dropdown-item" href="~/User/mysoldnotes">My Sold Notes</a>
+                                                <a class="dropdown-item" href="~/User/myrejectednotes">My Rejected Notes</a>
+                                                <a class="dropdown-item" href="~/User/changepassword">Change Password</a>
+                                                <a class="dropdown-item logout-btn-dropdown" href="~/User/login">Logout</a>
                                             </div>
                                         </div>
+                                    </div>
                                 </li>
                                 <li>
                                     <a class="btn btn-general btn-purple" href="~/User/login" title="Download" role="button">Logout</a>
@@ -141,43 +172,103 @@
         </div>
         <!-- Header ends -->
 
-        <!-- Thanks popup -->
+        @{
+            IEnumerable<NotesMarketPlace.Models.AllProgressNotes> mydownload = ViewBag.DownloadNotes;
+        }
+
+        <!-- Review popup -->
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <img src="~/Content/User/images/notes-detail/close.png" alt="">
-                        </button>
-                    </div>
-                    <div class="modal-body">
-
-                        <p class="add-review-heading">Add Review</p>
-
-                        <div class="add-reviews-stars">
-                            <img src="~/Content/User/images/notes-detail/star.png" alt="">
-                            <img src="~/Content/User/images/notes-detail/star.png" alt="">
-                            <img src="~/Content/User/images/notes-detail/star.png" alt="">
-                            <img src="~/Content/User/images/notes-detail/star.png" alt="">
-                            <img src="~/Content/User/images/notes-detail/star-white.png" alt="">
+        @using (Html.BeginForm("noteReview", "User", FormMethod.Post))
+        {
+            <div class="modal fade" id="ReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <img src="~/Content/User/images/notes-detail/close.png" alt="">
+                            </button>
                         </div>
+                        <div class="modal-body">
 
-                        <div class="form-group">
-                            <label class="info-label" for="comment-questions">Comments *</label>
-                            <textarea class="form-control input-box-style" id="" placeholder="Comments..."></textarea>
+                            <p class="add-review-heading">Add Review</p>
+
+                            <div class="add-reviews-stars" onmouseout="FillSelected()">
+                                <i id="s1" class="text-muted fa fa-star" onmouseout="FillOut(1)" onmouseover="FillOver(1)" onclick="FillClick(1)"></i>
+                                <i id="s2" class="text-muted fa fa-star" onmouseout="FillOut(2)" onmouseover="FillOver(2)" onclick="FillClick(2)"></i>
+                                <i id="s3" class="text-muted fa fa-star" onmouseout="FillOut(3)" onmouseover="FillOver(3)" onclick="FillClick(3)"></i>
+                                <i id="s4" class="text-muted fa fa-star" onmouseout="FillOut(4)" onmouseover="FillOver(4)" onclick="FillClick(4)"></i>
+                                <i id="s5" class="text-muted fa fa-star" onmouseout="FillOut(5)" onmouseover="FillOver(5)" onclick="FillClick(5)"></i>
+                            </div>
+                            <input type="hidden" id="lblRating" name="Ratings" />
+
+                            <div class="form-group">
+                                <label class="info-label" for="comment-questions">Comments *</label>
+                                @Html.TextAreaFor(x => x.Comments, new { @class = "form-control input-box-style", id = "nr-description", placeholder = "Comments...", style = "resize:none;" })
+                                <div class="incorrect-password-label">
+                                    <p>
+                                        @Html.ValidationMessage("Comments", new { style = "color:red" })
+                                    </p>
+                                </div>
+                            </div>
+
+                            @foreach (var i in mydownload)
+                            {
+                                <input type="hidden" value="@i.SellerNotes.NoteID" name="noteID" />
+                            }
+
+                            <div class="form-btn">
+                                <button type="submit" class="btn btn-general btn-purple">Submit</button>
+                            </div>
+
                         </div>
-
-                        <div class="form-btn">
-                            <button class="btn btn-general btn-purple">Submit</button>
-                        </div>
-
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Thanks popup -->
+        }
+        <!-- Review popup -->
+        <!--Spam Report-->
+        @using (Html.BeginForm("spamReport", "User", FormMethod.Post))
+        {
+            <div class="modal fade" id="ReportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <img src="~/Content/User/images/notes-detail/close.png" alt="">
+                            </button>
+                        </div>
+                        <div class="modal-body">
 
+                            <p class="add-review-heading">Add Report</p>
+
+                            @ViewBag.spammsg
+
+                            <div class="form-group">
+                                <label class="info-label" for="comment-questions">Remark *</label>
+                                @Html.TextAreaFor(x => x.Comments, new { @class = "form-control input-box-style", id = "nr-description", placeholder = "Remark...", style = "resize:none;" })
+                                <div class="incorrect-password-label">
+                                    <p>
+                                        @Html.ValidationMessage("Remark", new { style = "color:red" })
+                                    </p>
+                                </div>
+                            </div>
+
+                            @foreach (var i in mydownload)
+                            {
+                                <input type="hidden" value="@i.SellerNotes.NoteID" name="noteID" />
+                            }
+
+                            <div class="form-btn">
+                                <button type="submit" class="btn btn-general btn-purple">Submit</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <!--Spam Report-->
+        <!--Spam Report-->
         <!-- my downloads table -->
         <div class="content-box-lg">
 
@@ -212,7 +303,7 @@
                                     <th scope="col">sr no.</th>
                                     <th scope="col">Note title</th>
                                     <th scope="col">category</th>
-                                    <th scope="col">Buyer</th>
+                                    <th scope="col">Seller</th>
                                     <th scope="col">Sell type</th>
                                     <th scope="col">price</th>
                                     <th scope="col">downloaded time</th>
@@ -221,255 +312,51 @@
                             </thead>
                             <tbody>
 
-                                <tr>
-                                    <td>1</td>
-                                    <td class="purple-td">Data Science</td>
-                                    <td>Science</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Paid</td>
-                                    <td>$250</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
+                                @if (ViewBag.DownloadNotesCount > 0)
+                                {
+                                    int s = 0;
 
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
+                                    foreach (var i in mydownload)
+                                    {
+                                        s++;
+                                        <tr>
+                                            <td>@s</td>
+                                            <td class="purple-td">@i.SellerNotes.NoteTitle</td>
+                                            <td>@i.Category.CategoryName</td>
+                                            <td>@i.user.EmailID</td>
+                                            <td>@i.SellerNotes.SellType</td>
+                                            <td>@i.SellerNotes.SellPrice</td>
+                                            <td>@i.downloadNote.AttachmentDownloadDate</td>
+                                            <td class="text-center visible-overflow-for-dropdown">
+                                                <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
 
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">Add Reviews / Feedback</a>
-                                                <a class="dropdown-item" href="#">Report as Inappropriate</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                                <div class="dropdown dropdown-dots-table">
+                                                    <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
+                                                    </a>
 
-                                <tr>
-                                    <td>2</td>
-                                    <td class="purple-td">Accounts</td>
-                                    <td>Commerce</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Free</td>
-                                    <td>$0</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                        <a class="dropdown-item" href="#">Download Note</a>
+                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ReviewModal">Add Reviews / Feedback</a>
+                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ReportModal">Report as Inappropriate</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="8">
+                                            <center>
+                                                No Data Found !
+                                            </center>
 
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
+                                        </td>
+                                    </tr>
+                                }
 
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">Add Reviews / Feedback</a>
-                                                <a class="dropdown-item" href="#">Report as Inappropriate</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td class="purple-td">Social Study</td>
-                                    <td>Social</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Free</td>
-                                    <td>$0</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
-
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">Add Reviews / Feedback</a>
-                                                <a class="dropdown-item" href="#">Report as Inappropriate</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>4</td>
-                                    <td class="purple-td">AI</td>
-                                    <td>IT</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Paid</td>
-                                    <td>$158</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
-
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">Add Reviews / Feedback</a>
-                                                <a class="dropdown-item" href="#">Report as Inappropriate</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>5</td>
-                                    <td class="purple-td">Lorem ipsum</td>
-                                    <td>Lorem</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Free</td>
-                                    <td>$555</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
-
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">Add Reviews / Feedback</a>
-                                                <a class="dropdown-item" href="#">Report as Inappropriate</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>6</td>
-                                    <td class="purple-td">Data Science</td>
-                                    <td>Science</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Paid</td>
-                                    <td>$0</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
-
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">Add Reviews / Feedback</a>
-                                                <a class="dropdown-item" href="#">Report as Inappropriate</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>7</td>
-                                    <td class="purple-td">Accounts</td>
-                                    <td>Commerce</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Free</td>
-                                    <td>$0</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
-
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">Add Reviews / Feedback</a>
-                                                <a class="dropdown-item" href="#">Report as Inappropriate</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>8</td>
-                                    <td class="purple-td">Social Study</td>
-                                    <td>Social</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Free</td>
-                                    <td>$0</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
-
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">Add Reviews / Feedback</a>
-                                                <a class="dropdown-item" href="#">Report as Inappropriate</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>9</td>
-                                    <td class="purple-td">AI</td>
-                                    <td>IT</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Paid</td>
-                                    <td>$250</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
-
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">Add Reviews / Feedback</a>
-                                                <a class="dropdown-item" href="#">Report as Inappropriate</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>10</td>
-                                    <td class="purple-td">Lorem ipsum</td>
-                                    <td>Lorem</td>
-                                    <td>testing123@gmail.com</td>
-                                    <td>Free</td>
-                                    <td>$115</td>
-                                    <td>27 Nov 2020, 11:24:34</td>
-                                    <td class="text-center visible-overflow-for-dropdown">
-                                        <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
-
-                                        <div class="dropdown dropdown-dots-table">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Download Note</a>
-                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">Add Reviews / Feedback</a>
-                                                <a class="dropdown-item" href="#">Report as Inappropriate</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
 
                             </tbody>
                         </table>
@@ -481,7 +368,6 @@
 
         </div>
         <!-- progress note table -->
-
         <!-- pagination -->
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
@@ -503,7 +389,6 @@
             </ul>
         </nav>
         <!-- pagination -->
-
         <!-- Footer  -->
         <footer>
             <div class="container">
@@ -526,7 +411,6 @@
     </section>
 
     <!-- Java-scripts -->
-
     <!-- JQuery -->
     <script src="~/Scripts/User/js/jquery.js"></script>
 

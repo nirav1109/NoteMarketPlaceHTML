@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model NotesMarketPlace.Models.Countries
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -195,19 +196,21 @@
 
                 <div class="container">
                     <div class="row">
-                        <form>
+                        <form method="post">
                             <div class="row">
 
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
 
                                     <div class="form-group">
-                                        <label class="info-label" for="exampleInputEmail1">Country Name *</label>
-                                        <input type="text" class="form-control input-box-style" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter country name">
+                                        <label class="info-label" for="city">Country Name *</label>
+                                        @Html.TextBoxFor(x=>x.CountryName,new {@class="form-control input-box-style",@id="city",placeholder="Enter country name" })
+                                       
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="info-label" for="exampleInputEmail1">Country Code *</label>
-                                        <input type="text" class="form-control input-box-style" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter country code">
+                                        <label class="info-label" for="ccode">Country Code *</label>
+                                       @Html.TextBoxFor(x=>x.CountryCode,new { @class="form-control input-box-style",@id="ccode",placeholder="Enter country code"})
+                                       
                                     </div>
 
                                     <div class="form-btn">

@@ -1,31 +1,41 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
+
+    <!-- Important Meta Tags -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dashboard - NotesMarketPlace</title>
 
-    <!-- Faviocn -->
+    <!-- Title -->
+    <title>Dashboard - Notes MarketPlace</title>
+
+    <!-- Favicon -->
     <link rel="shortcut icon" href="~/Content/User/images/logo/favicon.ico">
-    
 
-    <!-- GoogleFonts -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap -->
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="~/Content/User/css/font-awesome/css/fontawesome.min.css">
+
+    <!-- FontAwesome kit -->
+    <script src="https://kit.fontawesome.com/4fa77e6d3c.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap css -->
     <link rel="stylesheet" href="~/Content/User/css/bootstrap/bootstrap.min.css">
 
-    <!-- Customized css -->
+    <!-- Custom css -->
     <link rel="stylesheet" href="~/Content/User/css/style.css">
 
     <!-- Responsive css -->
     <link rel="stylesheet" href="~/Content/User/css/responsive.css">
+
 </head>
 
 <body>
+
     <section id="dashboard">
 
         <!-- Header -->
@@ -38,18 +48,17 @@
 
                     <div class="logo-wrapper">
                         <a href="~/User/home" title="Site Logo">
-                            
-                            <img src="~/Content/User/images/logo/dark-logo.png" alt="Logo"/>
+                            <img src="~/Content/User/images/logo/dark-logo.png" alt="Logo">
                         </a>
                     </div>
                     <div class="navigation-wrapper">
                         <nav class="main-nav">
                             <ul class="menu-navigation">
                                 <li>
-                                    <a href="~/User/searchnotes">Search Notes</a>
+                                    <a href="~/User/searchNotes">Search Notes</a>
                                 </li>
-                                <li>
-                                    <a href="~/User/addnote">Sell Your Notes</a>
+                                <li class="active">
+                                    <a href="~/User/addNote">Sell Your Notes</a>
                                 </li>
                                 <li>
                                     <a href="~/User/buyersrequests">Buyer Requests</a>
@@ -58,28 +67,28 @@
                                     <a href="~/User/faq">FAQ</a>
                                 </li>
                                 <li>
-                                    <a href="~/User/contactus">Contact Us</a>
+                                    <a href="~/User/contactUs">Contact Us</a>
                                 </li>
                                 <li class="logged-in-user-photo-li">
                                     <div class="dropdown">
-                                        <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <div class="logged-in-user-photo">
-                                                <img src="~/Content/User/images/testimonial/customer-4.png" alt="User Photo" class="rounded-circle">
+                                                <img src="~/Content/User/images/testimonial/customer-1.png" alt="User Photo" class="rounded-circle">
                                             </div>
                                         </a>
 
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <a class="dropdown-item" href="~/User/userprofile">My Profile</a>
-                                            <a class="dropdown-item" href="~/User/mydownloads">My Downloads</a>
-                                            <a class="dropdown-item" href="~/User/mysoldnotes">My Sold Notes</a>
-                                            <a class="dropdown-item" href="~/User/myrejectednotes">My Rejected Notes</a>
-                                            <a class="dropdown-item" href="~/User/changepassword">Change Password</a>
-                                            <a class="dropdown-item logout-btn-dropdown" href="~/User/Logout">Logout</a>
+                                            <a class="dropdown-item" href="~/User/userProfile">My Profile</a>
+                                            <a class="dropdown-item" href="~/User/myDownloads">My Downloads</a>
+                                            <a class="dropdown-item" href="~/User/mySoldNotes">My Sold Notes</a>
+                                            <a class="dropdown-item" href="~/User/myRejectedNotes">My Rejected Notes</a>
+                                            <a class="dropdown-item" href="~/User/changePassword">Change Password</a>
+                                            <a class="dropdown-item logout-btn-dropdown" href="~/User/login">Logout</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <a class="btn btn-general btn-purple" href="~/User/Logout" title="Download" role="button">Logout</a>
+                                    <a class="btn btn-general btn-purple" href="~/User/logout" title="Download" role="button">Logout</a>
                                 </li>
                             </ul>
                         </nav>
@@ -94,10 +103,10 @@
                         <div id="mobile-nav-content">
                             <ul class="nav">
                                 <li>
-                                    <a href="~/User/searchnotes">Search Notes</a>
+                                    <a href="~/User/searchNotes">Search Notes</a>
                                 </li>
-                                <li>
-                                    <a href="~/User/addnote">Sell Your Notes</a>
+                                <li class="active">
+                                    <a href="~/User/addNote">Sell Your Notes</a>
                                 </li>
                                 <li>
                                     <a href="~/User/buyersrequests">Buyer Requests</a>
@@ -106,28 +115,28 @@
                                     <a href="~/User/faq">FAQ</a>
                                 </li>
                                 <li>
-                                    <a href="~/User/contact-us"">Contact Us</a>
+                                    <a href="~/User/contactUs">Contact Us</a>
                                 </li>
                                 <li class=" logged-in-user-photo-li">
-                                        <div class="logged-in-user-photo">
-                                            <div class="dropdown">
-                                                <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <img src="~/Content/User/images/testimonial/customer-4.png" alt="User Photo" class="rounded-circle">
-                                                </a>
+                                    <div class="logged-in-user-photo">
+                                        <div class="dropdown">
+                                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img src="~/Content/User/images/testimonial/customer-1.png" alt="User Photo" class="rounded-circle">
+                                            </a>
 
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <a class="dropdown-item" href="~/User/userprofile">My Profile</a>
-                                                    <a class="dropdown-item" href="~/User/mydownloads">My Downloads</a>
-                                                    <a class="dropdown-item" href="~/User/mysoldnotes">My Sold Notes</a>
-                                                    <a class="dropdown-item" href="~/User/myrejectednotes">My Rejected Notes</a>
-                                                    <a class="dropdown-item" href="~/User/changepassword">Change Password</a>
-                                                    <a class="dropdown-item logout-btn-dropdown" href="~/User/Logout">Logout</a>
-                                                </div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <a class="dropdown-item" href="~/User/userProfile">My Profile</a>
+                                                <a class="dropdown-item" href="~/User/myDownloads">My Downloads</a>
+                                                <a class="dropdown-item" href="~/User/mySoldNotes">My Sold Notes</a>
+                                                <a class="dropdown-item" href="~/User/myRejectedNotes">My Rejected Notes</a>
+                                                <a class="dropdown-item" href="~/User/changePassword">Change Password</a>
+                                                <a class="dropdown-item logout-btn-dropdown" href="~/User/login">Logout</a>
                                             </div>
                                         </div>
+                                    </div>
                                 </li>
                                 <li>
-                                    <a class="btn btn-general btn-purple" href="~/User/Logout" title="Download" role="button">Logout</a>
+                                    <a class="btn btn-general btn-purple" href="~/User/login" title="Download" role="button">Logout</a>
                                 </li>
                             </ul>
                         </div>
@@ -136,17 +145,16 @@
             </header>
         </div>
         <!-- Header ends -->
-
         <!-- Dashboard box -->
         <div class="content-box-lg">
-           
+
             <div class="container">
                 <div class="row no-gutters">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-6 text-left">
                         <p class="dashboard-heading">Dashboard</p>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">
-                       <a href="~/User/addnote"><button class="btn btn-general btn-purple add-note-btn">Add Note</button></a> 
+                        <a href="~/User/addNote"><button class="btn btn-general btn-purple add-note-btn">Add Note</button></a>
                     </div>
                 </div>
             </div>
@@ -166,14 +174,14 @@
 
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                 <div class="number-of-notes-sold dashboard-single-box">
-                                    <p class="dashboard-single-detail"> @ViewBag.mySoldNotes</p>
+                                  <a href="~/User/mysoldnotes"><p class="dashboard-single-detail">@ViewBag.mySoldNotes</p></a>  
                                     <p class="dashboard-single-detail-inst">Number of Notes Sold</p>
                                 </div>
                             </div>
 
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                 <div class="money-earned dashboard-single-box">
-                                    <p class="dashboard-single-detail">$ @ViewBag.totalEarning </p>
+                                   <a href="~/User/mysoldnotes"> <p class="dashboard-single-detail">$ @ViewBag.totalEarning</p></a>
                                     <p class="dashboard-single-detail-inst">Money Earned</p>
                                 </div>
                             </div>
@@ -187,23 +195,26 @@
 
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                 <div class="my-downloads dashboard-single-box">
-                                    <p class="dashboard-single-detail">@ViewBag.myDownloadNotes</p>
-                                    <p class="dashboard-single-detail-inst">My Downloads</p>
-                                </div>
+                                    <a href="~/User/mydownloads">
+                                        <p class="dashboard-single-detail">@ViewBag.myDownloadNotes</p></a>
+                                        <p class="dashboard-single-detail-inst">My Downloads</p>
+</div>
                             </div>
 
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                 <div class="my-rejected-notes dashboard-single-box">
-                                    <p class="dashboard-single-detail">@ViewBag.myRejectedNotes</p>
-                                    <p class="dashboard-single-detail-inst">My Rejected Notes</p>
-                                </div>
+                                    <a href="~/User/myrejectednotes">
+                                        <p class="dashboard-single-detail">@ViewBag.myRejectedNotes</p></a>
+                                        <p class="dashboard-single-detail-inst">My Rejected Notes</p>
+</div>
                             </div>
 
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                 <div class="buyer-request dashboard-single-box">
-                                    <p class="dashboard-single-detail">@ViewBag.buyerRequests</p>
-                                    <p class="dashboard-single-detail-inst">Buyer Requests</p>
-                                </div>
+                                    <a href="~/User/buyersrequests">
+                                        <p class="dashboard-single-detail">@ViewBag.buyerRequests</p></a>
+                                        <p class="dashboard-single-detail-inst">Buyer Requests</p>
+</div>
                             </div>
 
                         </div>
@@ -215,7 +226,6 @@
 
         </div>
         <!-- Dashboard box -->
-
         <!-- progress note table -->
         <div class="content-box-lg">
 
@@ -226,20 +236,23 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
 
-                        <div class="row no-gutters text-right general-search-bar-btn-wrapper">
-                            <div class="form-group has-search-bar">
-                                <span class="search-symbol"><img src="~/Content/User/images/Dashboard/search-icon.png" alt=""></span>
-                                <input type="text" class="form-control input-box-style search-notes-bar" id="example" placeholder="Search notes here...">
-                            </div>
+                        <form name="f1">
+                            <div class="row no-gutters text-right general-search-bar-btn-wrapper">
+                                <div class="form-group has-search-bar">
+                                    <span class="search-symbol"><img src="~/Content/User/images/Dashboard/search-icon.png" alt=""></span>
+                                    <input type="text" class="form-control input-box-style search-notes-bar" id="example" placeholder="Search notes here..." name="searchnotes">
+                                </div>
 
-                            <button class="btn btn-general btn-purple general-search-bar-btn">Search</button>
-                        </div>
+                                <button type="submit" name="submit" value="search1" class="btn btn-general btn-purple general-search-bar-btn">Search</button>
+                            </div>
+                        </form>
 
                     </div>
                 </div>
             </div>
 
             <div class="container">
+
                 @{
                     IEnumerable<NotesMarketPlace.Models.AllProgressNotes> Inprogerss = ViewBag.inProgressNotes;
                 }
@@ -258,20 +271,42 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var i in Inprogerss)
+                                @if (ViewBag.inProgressNotesCount > 0)
+                                {
+                                    foreach (var i in Inprogerss)
+                                    {
+                                        <tr>
+                                            <td>@i.SellerNotes.CreatedDate</td>
+                                            <td>@i.SellerNotes.NoteTitle</td>
+                                            <td>@i.Category.CategoryName</td>
+                                            <td>@i.status.Status</td>
+                                            @if (@i.status.Status == "Draft")
+                                            {
+                                                <td class="text-center">
+                                                    <a href="draftToPublish/@i.SellerNotes.NoteID"><img class="edit-img-in-table" src="~/Content/User/images/Dashboard/edit.png" alt="edit"></a>
+                                                    <a href="deleteNote/@i.SellerNotes.NoteID"><img class="delete-img-in-table" src="~/Content/User/images/Dashboard/delete.png" alt="delete"></a>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td class="text-center">
+                                                    <a href="noteDetails/@i.SellerNotes.NoteID"><img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="eye"></a>
+                                                </td>
+                                            }
+
+                                        </tr>
+                                    }
+                                }
+                                else
                                 {
                                     <tr>
-                                        <td>@i.SellerNotes.CreatedDate</td>
-                                        <td>@i.SellerNotes.NoteTitle</td>
-                                        <td>@i.Category.CategoryName</td>
-                                        <td>@i.Status.Status</td>
-                                        <td class="text-center">
-                                            <img class="edit-img-in-table" src="~/Content/User/images/Dashboard/edit.png" alt="edit">
-                                            <img class="delete-img-in-table" src="~/Content/User/images/Dashboard/delete.png" alt="edit">
+                                        <td colspan="5">
+                                            <center>
+                                                No Record Found!
+                                            </center>
                                         </td>
                                     </tr>
                                 }
-
                             </tbody>
                         </table>
 
@@ -282,7 +317,6 @@
 
         </div>
         <!-- progress note table -->
-
         <!-- pagination -->
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
@@ -304,7 +338,6 @@
             </ul>
         </nav>
         <!-- pagination -->
-
         <!-- published note table -->
         <div class="content-box-lg">
 
@@ -315,23 +348,27 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
 
-                        <div class="row no-gutters text-right general-search-bar-btn-wrapper">
-                            <div class="form-group has-search-bar">
-                                <span class="search-symbol"><img src="~/Content/User/images/Dashboard/search-icon.png" alt=""></span>
-                                <input type="text" class="form-control input-box-style search-notes-bar" id="example" placeholder="Search notes here...">
-                            </div>
+                        <form name="f2">
+                            <div class="row no-gutters text-right general-search-bar-btn-wrapper">
+                                <div class="form-group has-search-bar">
+                                    <span class="search-symbol"><img src="~/Content/User/images/Dashboard/search-icon.png" alt=""></span>
+                                    <input type="text" class="form-control input-box-style search-notes-bar" id="example" placeholder="Search notes here..." name="searchnotes">
+                                </div>
 
-                            <button class="btn btn-general btn-purple general-search-bar-btn">Search</button>
-                        </div>
+                                <button name="submit" type="submit" value="search2" class="btn btn-general btn-purple general-search-bar-btn">Search</button>
+                            </div>
+                        </form>
 
                     </div>
                 </div>
             </div>
 
             <div class="container">
+
                 @{
                     IEnumerable<NotesMarketPlace.Models.AllPublishNotes> published = ViewBag.publishedNote;
                 }
+
                 <div class="published-notes-table general-table-responsive">
                     <div class="table-responsive-lg">
 
@@ -347,21 +384,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var i in published)
+                                @if (ViewBag.publishedNoteCount > 0)
+                                {
+                                    foreach (var i in published)
+                                    {
+                                        <tr>
+                                            <td>@i.SellerNotes.CreatedDate</td>
+                                            <td>@i.SellerNotes.NoteTitle</td>
+                                            <td>@i.Category.CategoryName</td>
+                                            <td>@i.SellerNotes.SellType</td>
+                                            <td>@i.SellerNotes.SellPrice</td>
+                                            <td class="text-center"><img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="eye"></td>
+                                        </tr>
+                                    }
+                                }
+                                else
                                 {
                                     <tr>
-                                        <td>@i.SellerNotes.CreatedDate</td>
-                                        <td>@i.SellerNotes.NoteTitle</td>
-                                        <td>@i.Category.CategoryName</td>
-                                        <td>@i.SellerNotes.SellType</td>
-                                        <td>@i.SellerNotes.SellPrice</td>
-                                        <td class="text-center">
-                                            <img class="edit-img-in-table" src="~/Content/User/images/Dashboard/edit.png" alt="edit">
-                                            <img class="delete-img-in-table" src="~/Content/User/images/Dashboard/delete.png" alt="edit">
+                                        <td colspan="6">
+                                            <center>
+                                                No Record Found !
+                                            </center>
                                         </td>
                                     </tr>
                                 }
-
 
                             </tbody>
                         </table>
@@ -373,7 +419,6 @@
 
         </div>
         <!-- published note table -->
-
         <!-- pagination -->
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
@@ -395,7 +440,6 @@
             </ul>
         </nav>
         <!-- pagination -->
-
         <!-- Footer  -->
         <footer>
             <div class="container">
@@ -417,14 +461,11 @@
 
     </section>
 
-    <!-- Java-scripts -->
 
     <!-- JQuery -->
     <script src="~/Scripts/User/js/jquery.js"></script>
 
     <!-- Production version -->
-    <!-- <script src="https://unpkg.com/@@popperjs/core@2"></script> -->
-
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
@@ -434,9 +475,6 @@
     <!-- Custom JS -->
     <script src="~/Scripts/User/js/script.js"></script>
 
-
-
-    <!-- Java-scripts -->
 </body>
 
 </html>

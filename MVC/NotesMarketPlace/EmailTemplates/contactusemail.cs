@@ -11,9 +11,9 @@ namespace NotesMarketPlace.EmailTemplates
     {
          public static void ContactUs(string usersubject,string name,string comment)
         {
-            var fromEmail = new MailAddress("supportedemail", "Notes Marketplace"); //need system email
-            var toEmail = new MailAddress("admin email");
-            var fromEmailPassword = "passwod"; // Replace with actual password
+            var fromEmail = new MailAddress("SupportedEmail", "Notes Marketplace"); //need system email
+            var toEmail = new MailAddress("AdminEmail");
+            var fromEmailPassword = "Password"; // Replace with actual password
             string subject =name +" - "+ usersubject;
             string msg = "Hello,<br/>";
             msg += comment;            

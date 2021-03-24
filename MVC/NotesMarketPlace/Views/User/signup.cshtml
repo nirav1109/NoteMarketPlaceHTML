@@ -85,7 +85,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="info-label" for="Password">Password</label>
-                                @Html.PasswordFor(x => x.Password, new { @class = "form-control input-box-style", @id = "Password", @placeholder = "Enter your password" })
+                                @Html.PasswordFor(x => x.Password, new {@type="password", @class = "form-control input-box-style", @id = "Password", @placeholder = "Enter your password" })
 
                                 <div class="eye"><img class="eye-img" src="~/Content/User/images/login/eye.png" alt="eye"></div>
                                 <div class="incorrect-password-label">
@@ -97,7 +97,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="info-label" for="Password2">Confirm Password</label>
-                                @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control input-box-style", @id = "Password2", @placeholder = "Re-enter password " })
+                                @Html.PasswordFor(x => x.ConfirmPassword, new {@type="password", @class = "form-control input-box-style", @id = "Password2", @placeholder = "Re-enter password " })
                                 <div class="incorrect-password-label">
                                     <p>
                                         @Html.ValidationMessage("ConfirmPassword", new { @style = "color:red" })

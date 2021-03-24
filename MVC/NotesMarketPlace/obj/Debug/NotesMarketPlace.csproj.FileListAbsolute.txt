@@ -71,3 +71,7 @@ D:\ASP.NET\NotesMarketPlace\bin\EntityFramework.SqlServer.dll
 D:\ASP.NET\NotesMarketPlace\bin\EntityFramework.xml
 D:\ASP.NET\NotesMarketPlace\bin\EntityFramework.SqlServer.xml
 D:\ASP.NET\NotesMarketPlace\obj\Debug\NotesMarketPlace.csprojAssemblyReference.cache
+D:\ASP.NET\NotesMarketPlace\bin\PagedList.dll
+D:\ASP.NET\NotesMarketPlace\bin\PagedList.Mvc.dll
+D:\ASP.NET\NotesMarketPlace\bin\PagedList.xml
+D:\ASP.NET\NotesMarketPlace\bin\PagedList.Mvc.xml
