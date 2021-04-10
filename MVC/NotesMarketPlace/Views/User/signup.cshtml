@@ -34,7 +34,7 @@
 <body>
     <!-- Background Image -->
     <img class="library-img" src="~/Content/User/images/login/banner-with-overlay.jpg" alt="Library">
-   
+
     <!-- Signup Box -->
     <section id="signup">
         <div class="container">
@@ -51,41 +51,41 @@
                         <p class="section-heading" class="text-center">Create An Account</p>
                         <p class="user-instruction">Enter your details to signup</p>
                         <div class="success-msg">
-                             @Html.Raw( @ViewBag.IsSuccess)  
+                            @Html.Raw(@ViewBag.IsSuccess)
                         </div>
                         <form action="Signup" method="post">
                             <div class="form-group">
                                 <label class="info-label" for="exampleInputEmail">First Name *</label>
                                 @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control input-box-style", @id = "exampleInputEmail", @placeholder = "Enter your first name" })
-                            <div class="incorrect-password-label">
-                                <p>
-                                    @Html.ValidationMessage("FirstName", new { @style = "color:red" })
-                                </p>
-                            </div>
-                                
+                                <div class="incorrect-password-label">
+                                    <p>
+                                        @Html.ValidationMessage("FirstName", new { @style = "color:red" })
+                                    </p>
+                                </div>
+
                             </div>
                             <div class="form-group">
                                 <label class="info-label" for="exampleInputEmail1">Last Name *</label>
                                 @Html.TextBoxFor(x => x.LastName, new { @class = "form-control input-box-style", @id = "exampleInputEmail1", @placeholder = "Enter your last name" })
-                            <div class="incorrect-password-label">
-                                <p>
-                                    @Html.ValidationMessage("LastName", new { @style = "color:red" })
-                                </p>
-                            </div>
-                                
+                                <div class="incorrect-password-label">
+                                    <p>
+                                        @Html.ValidationMessage("LastName", new { @style = "color:red" })
+                                    </p>
+                                </div>
+
                             </div>
                             <div class="form-group">
-                                <label class="info-label" for="exampleInputEmail1">Email *</label>                               
+                                <label class="info-label" for="exampleInputEmail1">Email *</label>
                                 @Html.TextBoxFor(x => x.EmailID, new { @class = "form-control input-box-style", @id = "exampleInputEmail2", @placeholder = "Enter your email " })
-                            <div class="incorrect-password-label">
-                                <p>
-                                    @Html.ValidationMessage("EmailID", new { @style = "color:red" })
-                                </p>
-                            </div>
+                                <div class="incorrect-password-label">
+                                    <p>
+                                        @Html.ValidationMessage("EmailID", new { @style = "color:red" })
+                                    </p>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="info-label" for="Password">Password</label>
-                                @Html.PasswordFor(x => x.Password, new {@type="password", @class = "form-control input-box-style", @id = "Password", @placeholder = "Enter your password" })
+                                @Html.PasswordFor(x => x.Password, new { @type = "password", @class = "form-control input-box-style", @id = "Password", @placeholder = "Enter your password" })
 
                                 <div class="eye"><img class="eye-img" src="~/Content/User/images/login/eye.png" alt="eye"></div>
                                 <div class="incorrect-password-label">
@@ -93,17 +93,17 @@
                                         @Html.ValidationMessage("Password", new { @style = "color:red" })
                                     </p>
                                 </div>
-                                
+
                             </div>
                             <div class="form-group">
                                 <label class="info-label" for="Password2">Confirm Password</label>
-                                @Html.PasswordFor(x => x.ConfirmPassword, new {@type="password", @class = "form-control input-box-style", @id = "Password2", @placeholder = "Re-enter password " })
+                                @Html.PasswordFor(x => x.ConfirmPassword, new { @type = "password", @class = "form-control input-box-style", @id = "Password2", @placeholder = "Re-enter password " })
                                 <div class="incorrect-password-label">
                                     <p>
                                         @Html.ValidationMessage("ConfirmPassword", new { @style = "color:red" })
                                     </p>
                                 </div>
-                                
+
                                 <div class="eye"><img class="eye-img" src="~/Content/User/images/login/eye.png" alt="eye"></div>
                             </div>
                             <div class="form-btn">

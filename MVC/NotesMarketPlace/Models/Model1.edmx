@@ -146,6 +146,7 @@
           <Property Name="NoteAttachmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NoteID" Type="int" Nullable="false" />
           <Property Name="FileName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FilesSize" Type="float" />
           <Property Name="FilePath" Type="varchar(max)" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" />
@@ -731,6 +732,7 @@
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
           <NavigationProperty Name="NoteDetails" Relationship="Self.FK_SellerNoteAttachment_NoteID" FromRole="SellerNoteAttachment" ToRole="NoteDetails" />
+          <Property Name="FilesSize" Type="Double" />
         </EntityType>
         <EntityType Name="SpamReports">
           <Key>
@@ -1300,6 +1302,7 @@
           <EntitySetMapping Name="SellerNoteAttachment">
             <EntityTypeMapping TypeName="NMModel.SellerNoteAttachment">
               <MappingFragment StoreEntitySet="SellerNoteAttachment">
+                <ScalarProperty Name="FilesSize" ColumnName="FilesSize" />
                 <ScalarProperty Name="NoteAttachmentID" ColumnName="NoteAttachmentID" />
                 <ScalarProperty Name="NoteID" ColumnName="NoteID" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />

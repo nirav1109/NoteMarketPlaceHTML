@@ -146,6 +146,7 @@
     <EntitySetMapping Name="SellerNoteAttachment">
       <EntityTypeMapping TypeName="NMModel.SellerNoteAttachment">
         <MappingFragment StoreEntitySet="SellerNoteAttachment">
+          <ScalarProperty Name="FilesSize" ColumnName="FilesSize" />
           <ScalarProperty Name="NoteAttachmentID" ColumnName="NoteAttachmentID" />
           <ScalarProperty Name="NoteID" ColumnName="NoteID" />
           <ScalarProperty Name="FileName" ColumnName="FileName" />

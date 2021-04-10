@@ -6,11 +6,16 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using PagedList.Mvc;
+using System.IO.Compression;
 
 namespace NoteMarketPlace.Controllers
 {
     public class AdminController : Controller
     {
+      
+        [Authorize]
         public ActionResult addadministrator()
         {
             using (NMEntities DBobj = new NMEntities())
@@ -22,6 +27,8 @@ namespace NoteMarketPlace.Controllers
 
         }
 
+
+        [Authorize]
         // POST: Admin
         [HttpPost]
         public ActionResult addadministrator(AdminSignUp model)
@@ -39,7 +46,7 @@ namespace NoteMarketPlace.Controllers
                     u.UserRoleID = 2;
                     u.IsActive = true;
                     u.CreatedDate = DateTime.Now;
-                    u.Password = "hdhd";
+                    u.Password = "admin";
                     u.IsEmailVerified = true;
 
                     DBobj.Users.Add(u);
@@ -73,18 +80,27 @@ namespace NoteMarketPlace.Controllers
             return View();
         }
 
+
+        [Authorize]
+        [Route("addcategory/id")]
         //get
-        public ActionResult addcategory()
+        public ActionResult addcategory(int?id)
         {
-            return View();
+            NMEntities nm = new NMEntities();
+            NoteCategories catdata = nm.NoteCategories.Where(x => x.NoteCategoryID == id).FirstOrDefault();
+            return View(catdata);
         }
 
+
+        [Authorize]
         [HttpPost]
         public ActionResult addcategory(NoteCategories catergory)
         {
             using (NMEntities nm = new NMEntities())
             {
+
                 NoteCategories ng = new NoteCategories();
+
                 ng.CategoryName = catergory.CategoryName;
                 ng.Description = catergory.Description;
                 ng.IsActive = true;
@@ -98,12 +114,21 @@ namespace NoteMarketPlace.Controllers
         }
 
 
+
+        [Authorize]
+        [Route("addcountry/id")]
         //get
-        public ActionResult addcountry()
+        public ActionResult addcountry(int?id)
         {
-            return View();
+            NMEntities nm = new NMEntities();
+            Countries cdata = nm.Countries.Where(x => x.CountryID == id).FirstOrDefault();
+           
+                return View(cdata);
+           
         }
 
+
+        [Authorize]
         [HttpPost]
         public ActionResult addcountry(Countries c)
         {
@@ -124,12 +149,20 @@ namespace NoteMarketPlace.Controllers
                 return View();
         }
 
-        //get
-        public ActionResult addtype()
+
+        [Authorize]
+        [Route("addType/id")]
+        public ActionResult addtype(int? id)
         {
-            return View();
+            NMEntities nm = new NMEntities();
+            NoteType typedata = nm.NoteType.Where(x => x.NoteTypeID == id).FirstOrDefault();
+            return View(typedata);
+            
+
         }
 
+
+        [Authorize]
         [HttpPost]
         public ActionResult addtype(NoteType type)
         {
@@ -150,11 +183,15 @@ namespace NoteMarketPlace.Controllers
             }
             return View();
         }
+
+        [Authorize]
         //get
         public ActionResult changepassword()
         {
             return View();
         }
+
+        [Authorize]
         [HttpPost]
         public ActionResult changepassword(ChangePassword cp)
         {
@@ -176,10 +213,13 @@ namespace NoteMarketPlace.Controllers
                 return View();
         }
 
+        [Authorize]
         public ActionResult forgot()
         {
             return View();
         }
+
+        [Authorize]
         [HttpPost]
         public ActionResult forgot(Users user)
         {
@@ -239,27 +279,28 @@ namespace NoteMarketPlace.Controllers
         }
 
 
-
+        [Authorize]
         // GET: ManageType
-        public ActionResult managetype(string model)
+        public ActionResult managetype(string typesearch, int? page)
         {
-            using (NMEntities nm = new NMEntities())
-            {
-                List<NoteType> notetypes = nm.NoteType.ToList();
-                List<Users> users = nm.Users.ToList();
-                var typeuser = (from n in notetypes
-                                join u in users on n.CreatedBy equals u.UserID into table1
-                                from u in table1.ToList()
+            NMEntities nm = new NMEntities();
+            
+               
+                var typeuser = (from n in nm.NoteType.Where(x => x.TypeName.StartsWith(typesearch) || typesearch == null).ToList()
+                                 join u in nm.Users.ToList() on n.CreatedBy equals u.UserID 
                                 select new typeuser
                                 {
                                     types = n,
                                     user = u
                                 });
-                ViewBag.tulist = typeuser;
+                ViewBag.tulist = typeuser.ToPagedList(page??1,5);
+            ViewBag.tulistCount = typeuser.Count();
                 return View();
-            }
+            
 
         }
+
+        [Authorize]
         // POST: ManageType
         [HttpPost]
         public ActionResult managetype(NoteType model)
@@ -268,26 +309,27 @@ namespace NoteMarketPlace.Controllers
         }
 
 
-
+        [Authorize]
         // GET: ManageCategory
-        public ActionResult managecategory(string model)
+        public ActionResult managecategory(string catsearch, int? page)
         {
-            using (NMEntities nm = new NMEntities())
-            {
-                var categorylist = nm.NoteCategories.ToList();
-                var usr = nm.Users.ToList();
-                var catusr = (from n in categorylist
-                              join u in usr on n.CreatedBy equals u.UserID into table1
-                              from u in table1.ToList()
+            NMEntities nm = new NMEntities();
+            
+                var catusr = (from c in nm.NoteCategories.Where(x=>x.CategoryName.StartsWith(catsearch) || catsearch == null ).ToList()
+                             join u in nm.Users.ToList() on c.CreatedBy equals u.UserID                               
                               select new typeuser
                               {
-                                  categorydata = n,
+                                  categorydata = c,
                                   user = u
                               });
-                ViewBag.culist = catusr;
-                return View();
-            }
+                ViewBag.culist = catusr.ToPagedList(page ?? 1, 5);
+            ViewBag.culistCount = catusr.Count();
+
+            return View();
+            
         }
+
+        [Authorize]
         // POST: ManageCategory
         [HttpPost]
         public ActionResult managecategory(NoteCategories model)
@@ -297,14 +339,15 @@ namespace NoteMarketPlace.Controllers
 
 
 
+        [Authorize]
         // GET: ManageCountry
-        public ActionResult managecountry(string model)
+        public ActionResult managecountry(string countysearch, int? page)
         {
             using (NMEntities nm = new NMEntities())
             {
-                var countrylist = nm.Countries.ToList();
+                var countrylist = nm.Countries.Where(x=>x.CountryName.StartsWith(countysearch) || countysearch == null).ToList();
                 var usr = nm.Users.ToList();
-                var cousr = (from co in countrylist
+                var cousr = (from co in countrylist                            
                              join u in usr on co.CreatedBy equals u.UserID into table1
                              from u in table1.ToList()
                              select new typeuser
@@ -312,11 +355,14 @@ namespace NoteMarketPlace.Controllers
                                  countrydata = co,
                                  user = u
                              });
-                ViewBag.colist = cousr;
+                ViewBag.colist = cousr.ToPagedList(page ?? 1, 5);
+                ViewBag.colistCount = cousr.Count();
                 return View();
             }
         }
 
+
+        [Authorize]
         // POST: ManageCountry
         [HttpPost]
         public ActionResult managecountry(Countries model)
@@ -327,23 +373,24 @@ namespace NoteMarketPlace.Controllers
 
 
 
-
-        public ActionResult dashboard()
+        [Authorize]
+        public ActionResult dashboard(int? page, string dashsearch, int? Month)
         {
-            using (NMEntities nm = new NMEntities())
-            {
+            NMEntities nm = new NMEntities();
+            
                 var day = DateTime.Now.AddDays(-7);
                 ViewBag.NoteUnderReview = nm.NoteDetails.Where(x=>x.Status==4 && x.IsActive==true).Count();
                 ViewBag.LastDownLoadedNote = nm.DownloadNotes.Where(x => x.IsSellerHasAllowedDownload == true && x.CreatedDate > day).Count();
                 ViewBag.LastRegisteredUsers = nm.Users.Where(x=>x.UserRoleID == 3 && x.CreatedDate > day).Count();
 
                 var categories = nm.NoteCategories.ToList();
-                var notes = nm.NoteDetails.Where(x => x.Status == 2 ).ToList();
+                var notes = nm.NoteDetails.Where(x => x.Status == 2 &&
+            (x.NoteTitle.StartsWith(dashsearch) || dashsearch == null) && (x.PublishedDate.Value.Month == Month || String.IsNullOrEmpty(Month.ToString()))).ToList();
                 
                 var users = nm.Users.ToList();
                 var dnotes = nm.DownloadNotes.Where(x => x.IsSellerHasAllowedDownload == true ).ToList();
                 var attachmentNote = nm.SellerNoteAttachment.ToList();
-                ViewBag.publishednotes = (from n in notes
+                var pn = (from n in notes
                                           join ct in categories on n.NoteCategoryID equals ct.NoteCategoryID into table1
                                           from ct in table1.ToList()
                                           join usr in users on n.SellerID equals usr.UserID into table2
@@ -358,29 +405,38 @@ namespace NoteMarketPlace.Controllers
                                               SellerNotes = n
                                           });
 
-               
+            ViewBag.publishednotes = pn.ToPagedList(page??1,5);
+            ViewBag.publishednotesCount = pn.Count();
 
-                
-                              
-            }
-                return View();
-        }
 
-        public ActionResult members()
-        {
-            using (NMEntities nm = new NMEntities())
-            {
-                var u = nm.Users.ToList();
-                var s = nm.NoteDetails.ToList();
-                 
-            }
+
+
+
             return View();
         }
 
-
-        public ActionResult memberdetails()
+        [Authorize]
+        public ActionResult members(int? page, string membersearch)
         {
-           int  id = 1;
+            NMEntities nm = new NMEntities();
+
+            
+            var members = nm.Users.Where(x => x.UserRoleID == 3 && ((x.FirstName + " " + x.LastName).StartsWith(membersearch) || membersearch == null)).ToList();
+
+            ViewBag.members = members.ToPagedList(page ?? 1, 5);
+            ViewBag.membersCount = members.Count();
+
+            return View();
+
+        }
+
+
+
+        [Authorize]
+        [Route("memberdetails/id")]
+        public ActionResult memberdetails(int? id)
+        {
+           
 
             using (NMEntities nm = new NMEntities())
             {
@@ -412,7 +468,7 @@ namespace NoteMarketPlace.Controllers
                 return View();
         }
 
-
+        [Authorize]
         public ActionResult myprofile()
         {
 
@@ -435,6 +491,8 @@ namespace NoteMarketPlace.Controllers
             }
         }
 
+
+        [Authorize]
         [HttpPost]
 
         public ActionResult myprofile(UserProfileData upd)
@@ -552,42 +610,391 @@ namespace NoteMarketPlace.Controllers
         }
 
 
-        public ActionResult manageadministrator()
+        [Authorize]
+        //GET: NotesUnderReview
+        public ActionResult notesunderreview(string FirstName, string nursearch, int? page)
         {
+            using (NMEntities DBobj = new NMEntities())
+            {
+                var adminnotesunderreview = (from n in DBobj.NoteDetails.Where(x => (x.Status == 4 || x.Status == 5) && (x.NoteTitle.StartsWith(nursearch) || nursearch == null)).ToList()
+                                             join cat in DBobj.NoteCategories.ToList() on n.NoteCategoryID equals cat.NoteCategoryID
+                                             join usr in DBobj.Users.ToList() on n.SellerID equals usr.UserID
+                                             where (usr.FirstName == FirstName || String.IsNullOrEmpty(FirstName))
+                                             join stu in DBobj.NoteStatus.ToList() on n.Status equals stu.NoteStatusID
+                                             select new AllProgressNotes
+                                             {
+                                                 user = usr,
+                                                 SellerNotes = n,
+                                                 Category = cat,
+                                                 status = stu
+                                             }).ToList();
+
+                ViewBag.notesUnderReview = adminnotesunderreview.ToPagedList(page ?? 1, 5);
+                ViewBag.notesUnderReviewCount = adminnotesunderreview.Count();
+
+                ViewBag.Sellers = new SelectList(DBobj.Users.Where(x=>x.UserRoleID == 3).ToList(), "FirstName", "FirstName");
+
+                return View();
+            }
+
+        }
+
+
+        [Authorize]
+
+        [Route("approveNotes/id")]
+        //GET: ApproveNote
+        public ActionResult approveNotes(int id)
+        {
+            using (NMEntities DBobj = new NMEntities())
+            {
+                NoteDetails note = DBobj.NoteDetails.FirstOrDefault(x => x.NoteID == id);
+                if (note != null)
+                {
+                    note.Status = 2;
+                    note.PublishedDate = DateTime.Now;
+                    note.ActionBy = (int)Session["UserID"];
+                    note.ModifiedBy = (int)Session["UserID"];
+                    note.ModifiedDate = DateTime.Now;
+                    DBobj.SaveChanges();
+                }
+                return RedirectToAction("notesUnderReview", "Admin");
+            }
+        }
+
+        [Authorize]
+        [Route("rejectNotes/id")]
+
+
+        [Authorize]
+        //GET: RejectNotes
+        public ActionResult rejectNotes(int id, string adminRemarks)
+        {
+            using (NMEntities DBobj = new NMEntities())
+            {
+                NoteDetails note = DBobj.NoteDetails.FirstOrDefault(x => x.NoteID == id);
+                if (note != null)
+                {
+                    note.Status = 3;
+                    note.AdminRemarks = adminRemarks;
+                    note.PublishedDate = DateTime.Now;
+                    note.ActionBy = (int)Session["UserID"];
+                    note.ModifiedBy = (int)Session["UserID"];
+                    note.ModifiedDate = DateTime.Now;
+                    DBobj.SaveChanges();
+                }
+                return RedirectToAction("notesUnderReview", "Admin");
+            }
+        }
+
+
+        [Authorize]
+        [Route("inReviewNotes/id")]
+        //GET: InReviewNotes
+        public ActionResult inReviewNotes(int id)
+        {
+            using (NMEntities DBobj = new NMEntities())
+            {
+                NoteDetails note = DBobj.NoteDetails.FirstOrDefault(x => x.NoteID == id);
+                if (note != null)
+                {
+                    note.Status = 5;
+                    note.PublishedDate = DateTime.Now;
+                    note.ActionBy = (int)Session["UserID"];
+                    note.ModifiedBy = (int)Session["UserID"];
+                    note.ModifiedDate = DateTime.Now;
+                    DBobj.SaveChanges();
+                }
+                return RedirectToAction("notesUnderReview", "Admin");
+            }
+        }
+
+
+        [Authorize]
+        public ActionResult downloadednotes(string Note, string Seller,string Buyer,string dnsearch, int? page)
+        {
+            using (NMEntities nm = new NMEntities())
+            {
+                var admindownloadnotes = (from dn in nm.DownloadNotes
+                                          join n in nm.NoteDetails.Where(x=>x.NoteTitle.StartsWith(dnsearch) || dnsearch==null) on dn.NoteID equals n.NoteID
+                                          where (dn.IsSellerHasAllowedDownload == true && dn.AttachmentPath != null && dn.AttachmentDownloadDate != null
+                                          && (n.NoteTitle == Note || String.IsNullOrEmpty(Note))) 
+                                          join nc in nm.NoteCategories on n.NoteCategoryID equals nc.NoteCategoryID
+                                          join u in nm.Users on dn.SellerID equals u.UserID
+                                          where (u.FirstName == Seller || String.IsNullOrEmpty(Seller))
+                                          join s in nm.Users on dn.BuyerID equals s.UserID
+                                          where (s.FirstName == Buyer || String.IsNullOrEmpty(Buyer))
+                                          select new AllProgressNotes
+                                             {
+                                                 user = u,
+                                                 SellerNotes = n,
+                                                 Category = nc,
+                                                 buyer = s,
+                                                 downloadNote = dn
+                                               
+                                          }).ToList();
+
+                ViewBag.downloadNote = admindownloadnotes.ToPagedList(page ?? 1, 5);
+                ViewBag.downloadNoteCount = admindownloadnotes.Count();
+
+                ViewBag.dnSellers = new SelectList(nm.Users.Where(x => x.UserRoleID == 3).ToList(), "FirstName", "FirstName");
+                ViewBag.dnBuyers = new SelectList(nm.Users.Where(x => x.UserRoleID == 3).ToList(), "FirstName", "FirstName");
+                ViewBag.dnNote = new SelectList(nm.NoteDetails.ToList(), "NoteTitle", "NoteTitle");
+                return View();
+            }
+
+        }
+
+
+
+
+        [Authorize]
+        //GET: PublishedNotes
+        public ActionResult publishednotes(string pnsearch, string FirstName,int?page)
+        {
+            NMEntities nm = new NMEntities();
+
+            List<AllProgressNotes> adminpublishednotes = (from n in nm.NoteDetails.Where(x => x.Status == 2 && (x.NoteTitle.StartsWith(pnsearch) || pnsearch == null)).ToList()
+                                                         join cat in nm.NoteCategories.ToList() on n.NoteCategoryID equals cat.NoteCategoryID
+                                                         join usr in nm.Users.ToList() on n.SellerID equals usr.UserID
+                                                         where usr.FirstName == FirstName || String.IsNullOrEmpty(FirstName)
+                                                         join u in nm.Users.ToList() on n.ActionBy equals u.UserID
+                                                         select new AllProgressNotes
+                                                         {
+                                                             user = usr,
+                                                             SellerNotes = n,
+                                                             Category = cat,
+                                                             buyer = u
+                                                         }).ToList();
+
+            ViewBag.publishedNotes = adminpublishednotes.ToPagedList(page ?? 1,5);
+            ViewBag.publishedNotesCount = adminpublishednotes.Count();
+
+            ViewBag.pnSellers = new SelectList(nm.Users.Where(x => x.UserRoleID == 3).ToList(), "FirstName", "FirstName");
+
+            return View();
+
+        }
+
+
+        [Authorize]
+        public ActionResult rejectednotes(string rnsearch, string Seller,int?page)
+        {
+            NMEntities nm = new NMEntities();
+
+            var adminRejectedNote = (from n in nm.NoteDetails.Where(x => x.Status == 3 && (x.NoteTitle.StartsWith(rnsearch) || rnsearch == null)).ToList()
+                                     join cat in nm.NoteCategories on n.NoteCategoryID equals cat.NoteCategoryID
+                                     join u in nm.Users on n.SellerID equals u.UserID
+                                     where (u.FirstName == Seller || String.IsNullOrEmpty(Seller))
+                                     join a in nm.Users on n.ActionBy equals a.UserID
+                                     select new AllProgressNotes
+                                     {
+                                         user = u,
+                                         SellerNotes = n,
+                                         Category = cat,
+                                         buyer = a,
+                                     }).ToList();
+
+            ViewBag.rejectedNote = adminRejectedNote.ToPagedList(page ?? 1,5);
+            ViewBag.rejectedNoteCount = adminRejectedNote.Count();
+
+            ViewBag.dnSellers = new SelectList(nm.Users.Where(x => x.UserRoleID == 3).ToList(), "FirstName", "FirstName");
             return View();
         }
 
-        public ActionResult downloadednotes()
+
+        [Authorize]
+        public ActionResult manageadministrator(string adminsearch , int?page)
         {
+            NMEntities nm = new NMEntities();
+            
+                var admins = (from u in nm.Users
+                              where u.UserRoleID == 2 && (u.FirstName.StartsWith(adminsearch) || adminsearch == null)
+                              join up in nm.UserProfile on u.UserID equals up.UserID                               
+                              select new AllProgressNotes
+                              {
+                                  uprofiledata =up,
+                                  user = u
+                              }).ToList();
+                ViewBag.administrator = admins.ToPagedList(page ?? 1, 5);
+                ViewBag.administratorCount = admins.Count();
+
             return View();
+            
+           
         }
 
 
+
+        [Authorize]
         public ActionResult managesystemconfiguration()
         {
             return View();
         }
-      
-      
+
+        [Authorize]
         public ActionResult notedetails()
         {
             return View();
         }
-        public ActionResult notesunderreview()
+
+
+        [Authorize]
+        public ActionResult spamreports(string spamsearch,int? page)
         {
+            NMEntities nm = new NMEntities();
+            var spamReports = (from sr in nm.SpamReports
+                          join u in nm.Users on sr.ReportByID equals u.UserID
+                          join n in nm.NoteDetails on sr.NoteID equals n.NoteID
+                          where(n.NoteTitle.StartsWith(spamsearch) || spamsearch == null)
+                          join c in nm.NoteCategories on n.NoteCategoryID equals c.NoteCategoryID
+                          select new AllProgressNotes
+                          {
+                              Category =c,
+                              user = u,
+                              spam =sr,
+                              SellerNotes=n
+                          }).ToList();
+            ViewBag.spams = spamReports.ToPagedList(page ?? 1,5);
+            ViewBag.spamsCount = spamReports.Count();
+
             return View();
         }
-        public ActionResult publishednotes()
+
+
+
+        [Authorize]
+        [Route("adminDownloadNote/id")]
+        //GET: AdminDownloadNote
+        public ActionResult adminDownloadNote(int id)
         {
-            return View();
+            using (NMEntities DBobj = new NMEntities())
+            {
+                SellerNoteAttachment sellerAttachement = DBobj.SellerNoteAttachment.Where(x => x.NoteID == id).FirstOrDefault();
+
+                //Return files
+
+                var filesPath = sellerAttachement.FilePath.Split(';');
+                var filesName = sellerAttachement.FileName.Split(';');
+                using (var ms = new MemoryStream())
+                {
+                    using (var z = new ZipArchive(ms, ZipArchiveMode.Create, true))
+                    {
+                        foreach (var FilePath in filesPath)
+                        {
+                            string FullPath = Path.Combine(Server.MapPath(FilePath));
+                            string FileName = Path.GetFileName(FullPath);
+                            if (FileName == "adminDownloadNote")
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                z.CreateEntryFromFile(FullPath, FileName);
+                            }
+                        }
+                    }
+                    return File(ms.ToArray(), "application/zip", "Attachement.zip");
+                }
+            }
         }
-        public ActionResult rejectednotes()
+
+        [Authorize]
+        [Route("deleteType/id")]
+
+
+        [Authorize]
+        //GET: DeleteType
+        public ActionResult deleteType(int id)
         {
-            return View();
+            NMEntities DBobj = new NMEntities();
+            var typedetail = DBobj.NoteType.Where(x => x.NoteTypeID == id).FirstOrDefault();
+            typedetail.IsActive = false;
+            DBobj.SaveChanges();
+            return RedirectToAction("managetype", "Admin");
         }
-        public ActionResult spamreports()
+
+        [Authorize]
+        [Route("deleteCategory/id")]
+        //GET: DeleteCategory
+        public ActionResult deleteCategory(int id)
         {
-            return View();
+            NMEntities DBobj = new NMEntities();
+            var categorydetail = DBobj.NoteCategories.Where(x => x.NoteCategoryID == id).FirstOrDefault();
+            categorydetail.IsActive = false;
+            DBobj.SaveChanges();
+            return RedirectToAction("managecategory", "Admin");
+        }
+
+
+        [Authorize]
+        [Route("deleteCountry/id")]
+        //GET: DeleteCountry
+        public ActionResult deleteCountry(int id)
+        {
+            NMEntities DBobj = new NMEntities();
+            var countrydetail = DBobj.Countries.Where(x => x.CountryID == id).FirstOrDefault();
+            countrydetail.IsActive = false;
+            DBobj.SaveChanges();
+            return RedirectToAction("managecountry", "Admin");
+        }
+
+        [Authorize]
+        [Route("deleteAdmin/id")]
+        //GET: DeleteAdmin
+        public ActionResult deleteAdmin(int id)
+        {
+            NMEntities DBobj = new NMEntities();
+            var admindetail = DBobj.Users.Where(x => x.UserID == id).FirstOrDefault();
+            admindetail.IsActive = false;
+            DBobj.SaveChanges();
+            return RedirectToAction("manageadministrator", "Admin");
+        }
+
+        [Authorize]
+        [Route("unpublishNote/id")]
+        //GET: DeleteAdmin
+        public ActionResult unpublishNote(int id,string adminRemarks)
+        {
+            using (NMEntities DBobj = new NMEntities())
+            {
+                NoteDetails note = DBobj.NoteDetails.FirstOrDefault(x => x.NoteID == id);
+                Users u = DBobj.Users.Where(x => x.UserID == note.SellerID).FirstOrDefault();
+                if (note != null)
+                {
+                    note.Status = 1005;
+                    note.AdminRemarks = adminRemarks;
+                    note.PublishedDate = DateTime.Now;
+                    note.ActionBy = (int)Session["UserID"];
+                    note.ModifiedBy = (int)Session["UserID"];
+                    note.ModifiedDate = DateTime.Now;
+                    DBobj.SaveChanges();
+                    unpublishSellerNote.unpublishNote(u.FirstName,u.EmailID, adminRemarks);
+                }
+                return RedirectToAction("dashboard", "Admin");
+            }
+        }
+
+
+        //GET: DeactivateUser
+        [Authorize]
+        public ActionResult deactivateUser(int uid)
+        {
+            using (NMEntities nm = new NMEntities())
+            {
+                Users udetail = nm.Users.Where(x => x.UserID == uid).FirstOrDefault();
+                IQueryable<NoteDetails> ndetail = nm.NoteDetails.Where(x => x.SellerID == uid);
+                foreach (var i in ndetail)
+                {
+                    i.IsActive = false;
+                    SellerNoteAttachment nddetails = nm.SellerNoteAttachment.Where(x => x.NoteID == i.NoteID).FirstOrDefault();
+                    nddetails.IsActive = false;
+                }
+                udetail.IsActive = false;
+
+                nm.SaveChanges();
+                return View("members", "Admin");
+            }
         }
 
     }

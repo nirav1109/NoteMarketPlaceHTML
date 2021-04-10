@@ -22,7 +22,11 @@ namespace NotesMarketPlace.Models
 
         public HttpPostedFileBase DisplayPicture { get; set; }
 
+        public decimal rating { get; set; }
 
+        public int Month { get; set; }
+
+        [Required]
         public List<HttpPostedFileBase> NoteAttachment { get; set; }
 
         [Required(ErrorMessage = "Please select Note Type")]

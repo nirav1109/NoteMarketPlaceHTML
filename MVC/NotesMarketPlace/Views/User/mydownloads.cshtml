@@ -1,35 +1,17 @@
-﻿@model NotesMarketPlace.Models.NoteReviews
-<!DOCTYPE html>
-<html lang="en">
+﻿@using PagedList
+@using PagedList.Mvc
+@model NotesMarketPlace.Models.NoteReviews
+
+@{
+    Layout = "~/Views/Shared/NavigationBar.cshtml";
+}
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>My Downloads - NotesMarketPlace</title>
 
-    <!-- favicon -->
-    <link rel="shortcut icon" href="~/Content/User/images/logo/favicon.ico">
+    <!-- Title -->
+    <title>My Downloads - Notes MarketPlace</title>
 
-    <!-- GoogleFonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="~/Content/User/css/font-awesome/css/fontawesome.min.css">
-
-    <!-- FontAwesome link -->
-    <script src="https://kit.fontawesome.com/4fa77e6d3c.js" crossorigin="anonymous"></script>
-
-    <!-- Bootstrap  -->
-    <link rel="stylesheet" href="~/Content/User/css/bootstrap/bootstrap.min.css">
-
-    <!-- Customized css -->
-    <link rel="stylesheet" href="~/Content/User/css/style.css">
-
-    <!-- Responsive css -->
-    <link rel="stylesheet" href="~/Content/User/css/responsive.css">
-
-    <!-- Script for star-->
+    <!-- Script For Star-->
     <script type="text/javascript">
         function FillOut(rating) {
             for (var i = 1; i <= rating; i++) {
@@ -62,214 +44,99 @@
 </head>
 
 <body>
+
     <section id="my-downloads">
 
-        <!-- Header -->
-        <div class="only-white-nav extra-style-nav">
-            <header class="site-header">
-                <div class="header-wrapper">
-
-                    <!-- Mobile Menu Open Button -->
-                    <span id="mobile-nav-open-btn">&#9776;</span>
-
-                    <div class="logo-wrapper">
-                        <a href="~/User/home" title="Site Logo">
-                            <img src="~/Content/User/images/logo/dark-logo.png" alt="Logo">
-                        </a>
-                    </div>
-                    <div class="navigation-wrapper">
-                        <nav class="main-nav">
-                            <ul class="menu-navigation">
-                                <li>
-                                    <a href="~/User/searchnotes">Search Notes</a>
-                                </li>
-                                <li>
-                                    <a href="~/User/addnote">Sell Your Notes</a>
-                                </li>
-                                <li>
-                                    <a href="~/User/buyersrequests">Buyer Requests</a>
-                                </li>
-                                <li>
-                                    <a href="~/User/faq">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="~/User/contactus">Contact Us</a>
-                                </li>
-                                <li class="logged-in-user-photo-li">
-                                    <div class="dropdown">
-                                        <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <div class="logged-in-user-photo">
-                                                <img src="~/Content/User/images/testimonial/customer-4.png" alt="User Photo" class="rounded-circle">
-                                            </div>
-                                        </a>
-
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <a class="dropdown-item" href="~/User/userprofile">My Profile</a>
-                                            <a class="dropdown-item active" href="~/User/mydownloads">My Downloads</a>
-                                            <a class="dropdown-item" href="~/User/mysoldnotes">My Sold Notes</a>
-                                            <a class="dropdown-item" href="~/User/myrejectednotes">My Rejected Notes</a>
-                                            <a class="dropdown-item" href="~/User/changepassword">Change Password</a>
-                                            <a class="dropdown-item logout-btn-dropdown" href="~/User/logout">Logout</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a class="btn btn-general btn-purple" href="login" title="Download" role="button">Logout</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-
-                    <!-- Mobile Menu -->
-                    <div id="mobile-nav">
-                        <img class="logo-in-mobile-menu" src="~/Content/User/images/logo/dark-logo.png" alt="Notes Logo">
-                        <!-- Mobile Menu Close Button -->
-                        <span id="mobile-nav-close-btn">&times;</span>
-
-                        <div id="mobile-nav-content">
-                            <ul class="nav">
-                                <li>
-                                    <a href="~/User/search-notes">Search Notes</a>
-                                </li>
-                                <li>
-                                    <a href="~/User/addnote">Sell Your Notes</a>
-                                </li>
-                                <li>
-                                    <a href="~/User/buyersrequests">Buyer Requests</a>
-                                </li>
-                                <li>
-                                    <a href="~/User/faq">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="~/User/contactus">Contact Us</a>
-                                </li>
-                                <li class=" logged-in-user-photo-li">
-                                    <div class="logged-in-user-photo">
-                                        <div class="dropdown">
-                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img src="~/Content/User/images/testimonial/customer-4.png" alt="User Photo" class="rounded-circle">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="~/User/userprofile">My Profile</a>
-                                                <a class="dropdown-item active" href="~/User/mydownloads">My Downloads</a>
-                                                <a class="dropdown-item" href="~/User/mysoldnotes">My Sold Notes</a>
-                                                <a class="dropdown-item" href="~/User/myrejectednotes">My Rejected Notes</a>
-                                                <a class="dropdown-item" href="~/User/changepassword">Change Password</a>
-                                                <a class="dropdown-item logout-btn-dropdown" href="~/User/login">Logout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a class="btn btn-general btn-purple" href="~/User/login" title="Download" role="button">Logout</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </header>
-        </div>
-        <!-- Header ends -->
-
         @{
-            IEnumerable<NotesMarketPlace.Models.AllProgressNotes> mydownload = ViewBag.DownloadNotes;
+            IPagedList<NotesMarketPlace.Models.AllProgressNotes> mydownload = ViewBag.DownloadNotes;
+            int s = 0;
         }
 
-        <!-- Review popup -->
-        <!-- Modal -->
-        @using (Html.BeginForm("noteReview", "User", FormMethod.Post))
+        <!-- Review Popup -->
+        @foreach (var i in mydownload)
         {
-            <div class="modal fade" id="ReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <img src="~/Content/User/images/notes-detail/close.png" alt="">
-                            </button>
-                        </div>
-                        <div class="modal-body">
-
-                            <p class="add-review-heading">Add Review</p>
-
-                            <div class="add-reviews-stars" onmouseout="FillSelected()">
-                                <i id="s1" class="text-muted fa fa-star" onmouseout="FillOut(1)" onmouseover="FillOver(1)" onclick="FillClick(1)"></i>
-                                <i id="s2" class="text-muted fa fa-star" onmouseout="FillOut(2)" onmouseover="FillOver(2)" onclick="FillClick(2)"></i>
-                                <i id="s3" class="text-muted fa fa-star" onmouseout="FillOut(3)" onmouseover="FillOver(3)" onclick="FillClick(3)"></i>
-                                <i id="s4" class="text-muted fa fa-star" onmouseout="FillOut(4)" onmouseover="FillOver(4)" onclick="FillClick(4)"></i>
-                                <i id="s5" class="text-muted fa fa-star" onmouseout="FillOut(5)" onmouseover="FillOver(5)" onclick="FillClick(5)"></i>
+            using (Html.BeginForm("noteReview", "User", FormMethod.Get))
+            {
+                <div class="modal fade" id="ReviewModal_@i.SellerNotes.NoteID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <img src="~/Content/User/images/notes-detail/close.png" alt="">
+                                </button>
                             </div>
-                            <input type="hidden" id="lblRating" name="Ratings" />
+                            <div class="modal-body">
 
-                            <div class="form-group">
-                                <label class="info-label" for="comment-questions">Comments *</label>
-                                @Html.TextAreaFor(x => x.Comments, new { @class = "form-control input-box-style", id = "nr-description", placeholder = "Comments...", style = "resize:none;" })
-                                <div class="incorrect-password-label">
-                                    <p>
-                                        @Html.ValidationMessage("Comments", new { style = "color:red" })
-                                    </p>
+                                <p class="add-review-heading">Add Review</p>
+
+                                <div class="add-reviews-stars" onmouseout="FillSelected()">
+                                    <i id="s1" class="text-muted fa fa-star" onmouseout="FillOut(1)" onmouseover="FillOver(1)" onclick="FillClick(1)"></i>
+                                    <i id="s2" class="text-muted fa fa-star" onmouseout="FillOut(2)" onmouseover="FillOver(2)" onclick="FillClick(2)"></i>
+                                    <i id="s3" class="text-muted fa fa-star" onmouseout="FillOut(3)" onmouseover="FillOver(3)" onclick="FillClick(3)"></i>
+                                    <i id="s4" class="text-muted fa fa-star" onmouseout="FillOut(4)" onmouseover="FillOver(4)" onclick="FillClick(4)"></i>
+                                    <i id="s5" class="text-muted fa fa-star" onmouseout="FillOut(5)" onmouseover="FillOver(5)" onclick="FillClick(5)"></i>
                                 </div>
+                                <input type="hidden" id="lblRating" name="Ratings" />
+
+                                <div class="form-group">
+                                    <label class="info-label" for="comment-questions">Comments *</label>
+                                    @Html.TextAreaFor(x => x.Comments, new { @class = "form-control input-box-style", id = "md-review", placeholder = "Comments...", style = "resize:none;" })
+                                    <div class="incorrect-password-label">
+                                        <p>
+                                            @Html.ValidationMessage("Comments", new { style = "color:red" })
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" value="@i.SellerNotes.NoteID" id="hiddenreviewid" name="noteID" />
+
+                                <div class="form-btn">
+                                    <button type="submit" class="btn btn-general btn-purple" name="submit1">Submit</button>
+                                </div>
+
                             </div>
-
-                            @foreach (var i in mydownload)
-                            {
-                                <input type="hidden" value="@i.SellerNotes.NoteID" name="noteID" />
-                            }
-
-                            <div class="form-btn">
-                                <button type="submit" class="btn btn-general btn-purple">Submit</button>
-                            </div>
-
                         </div>
                     </div>
                 </div>
-            </div>
+            }
         }
-        <!-- Review popup -->
-        <!--Spam Report-->
-        @using (Html.BeginForm("spamReport", "User", FormMethod.Post))
+        <!-- Review Popup Ends -->
+        <!-- Report Popup -->
+        @foreach (var i in mydownload)
         {
-            <div class="modal fade" id="ReportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <img src="~/Content/User/images/notes-detail/close.png" alt="">
-                            </button>
-                        </div>
-                        <div class="modal-body">
+            using (Html.BeginForm("spamReport", "User", FormMethod.Get))
+            {
+                <div class="modal fade" id="ReportModal_@i.SellerNotes.NoteID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <img src="~/Content/User/images/notes-detail/close.png" alt="">
+                                </button>
+                            </div>
+                            <div class="modal-body">
 
-                            <p class="add-review-heading">Add Report</p>
+                                <p class="add-review-heading">Add Report</p>
 
-                            @ViewBag.spammsg
-
-                            <div class="form-group">
-                                <label class="info-label" for="comment-questions">Remark *</label>
-                                @Html.TextAreaFor(x => x.Comments, new { @class = "form-control input-box-style", id = "nr-description", placeholder = "Remark...", style = "resize:none;" })
-                                <div class="incorrect-password-label">
-                                    <p>
-                                        @Html.ValidationMessage("Remark", new { style = "color:red" })
-                                    </p>
+                                <div class="form-group">
+                                    <label class="info-label" for="comment-questions">Remarks *</label>
+                                    <textarea name="remark" id="md-report" class="form-control input-box-style" placeholder="Remarks..." style="resize:none;"></textarea>
                                 </div>
+
+                                <input type="hidden" value="@i.SellerNotes.NoteID" id="hiddenreportid" name="noteID1" />
+
+                                <div class="form-btn">
+                                    <button type="submit" class="btn btn-general btn-purple" name="submit2">Submit</button>
+                                </div>
+
                             </div>
-
-                            @foreach (var i in mydownload)
-                            {
-                                <input type="hidden" value="@i.SellerNotes.NoteID" name="noteID" />
-                            }
-
-                            <div class="form-btn">
-                                <button type="submit" class="btn btn-general btn-purple">Submit</button>
-                            </div>
-
                         </div>
                     </div>
                 </div>
-            </div>
+            }
         }
-        <!--Spam Report-->
-        <!--Spam Report-->
-        <!-- my downloads table -->
+        <!-- Report Popup Ends -->
+        <!-- MyDownloads Box -->
         <div class="content-box-lg">
 
             <div class="container">
@@ -279,14 +146,17 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
 
-                        <div class="row no-gutters text-right general-search-bar-btn-wrapper">
-                            <div class="form-group has-search-bar">
-                                <span class="search-symbol"><img src="~/Content/User/images/Dashboard/search-icon.png" alt=""></span>
-                                <input type="text" class="form-control input-box-style search-notes-bar" id="example" placeholder="Search notes here...">
-                            </div>
+                        @using (Html.BeginForm("mydownloads", "User", FormMethod.Get))
+                        {
+                            <div class="row no-gutters text-right general-search-bar-btn-wrapper">
+                                <div class="form-group has-search-bar">
+                                    <span class="search-symbol"><img src="~/Content/User/images/Dashboard/search-icon.png" alt=""></span>
+                                    <input type="text" class="form-control input-box-style search-notes-bar" id="example" placeholder="Search notes here..." name="downloadSearch">
+                                </div>
 
-                            <button class="btn btn-general btn-purple general-search-bar-btn">Search</button>
-                        </div>
+                                <button type="submit" class="btn btn-general btn-purple general-search-bar-btn">Search</button>
+                            </div>
+                        }
 
                     </div>
                 </div>
@@ -300,13 +170,13 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col">sr no.</th>
+                                    <th scope="col">Sr no.</th>
                                     <th scope="col">Note title</th>
-                                    <th scope="col">category</th>
+                                    <th scope="col">Category</th>
                                     <th scope="col">Seller</th>
                                     <th scope="col">Sell type</th>
-                                    <th scope="col">price</th>
-                                    <th scope="col">downloaded time</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Downloaded time</th>
                                     <th scope="col" width="80px">Action</th>
                                 </tr>
                             </thead>
@@ -314,21 +184,19 @@
 
                                 @if (ViewBag.DownloadNotesCount > 0)
                                 {
-                                    int s = 0;
-
                                     foreach (var i in mydownload)
                                     {
                                         s++;
                                         <tr>
                                             <td>@s</td>
-                                            <td class="purple-td">@i.SellerNotes.NoteTitle</td>
+                                            <td class="purple-td"><a style="color:#6255a5; text-decoration:none" href="/User/notedetail/@i.SellerNotes.NoteID">@i.SellerNotes.NoteTitle</a></td>
                                             <td>@i.Category.CategoryName</td>
                                             <td>@i.user.EmailID</td>
                                             <td>@i.SellerNotes.SellType</td>
                                             <td>@i.SellerNotes.SellPrice</td>
                                             <td>@i.downloadNote.AttachmentDownloadDate</td>
                                             <td class="text-center visible-overflow-for-dropdown">
-                                                <img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit">
+                                                <a href="/User/notedetail/@i.SellerNotes.NoteID"><img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="edit"></a>
 
                                                 <div class="dropdown dropdown-dots-table">
                                                     <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -336,10 +204,11 @@
                                                     </a>
 
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                        <a class="dropdown-item" href="#">Download Note</a>
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ReviewModal">Add Reviews / Feedback</a>
-                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ReportModal">Report as Inappropriate</a>
+                                                        <a class="dropdown-item" href="/User/userDownloadNote/@i.SellerNotes.NoteID">Download Note</a>
+                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ReviewModal_@i.SellerNotes.NoteID" data-id="@i.SellerNotes.NoteID" onclick="document.getElementById('hiddenreviewid').value =@i.SellerNotes.NoteID">Add Reviews / Feedback</a>
+                                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ReportModal_@i.SellerNotes.NoteID" data-id="@i.SellerNotes.NoteID" onclick="document.getElementById('hiddenreportid').value =@i.SellerNotes.NoteID">Report as Inappropriate</a>
                                                     </div>
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -349,15 +218,10 @@
                                 {
                                     <tr>
                                         <td colspan="8">
-                                            <center>
-                                                No Data Found !
-                                            </center>
-
+                                            <center>No Record Found!</center>
                                         </td>
                                     </tr>
                                 }
-
-
                             </tbody>
                         </table>
 
@@ -367,68 +231,24 @@
             </div>
 
         </div>
-        <!-- progress note table -->
-        <!-- pagination -->
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item">
-                    <a class="page-link" href="" aria-label="Previous">
-                        <img src="~/Content/User/images/pagination/left-arrow.png" alt="">
-                    </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="" aria-label="Next">
-                        <img style="color: white;" src="~/Content/User/images/pagination/right-arrow.png" alt="">
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- pagination -->
-        <!-- Footer  -->
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-sm-8 col-12 text-left">
-                        <p>Copyright &copy; TatvaSoft All Rights Reserved.</p>
-                    </div>
-                    <div class="col-md-6 col-sm-4 col-12 text-right">
-                        <ul class="social-list">
-                            <li><a class="facebook-img" href="#"><img src="~/Content/User/images/Homepage/facebook.png" alt=""></a></li>
-                            <li><a class="twitter-img" href="#"><img src="~/Content/User/images/Homepage/twitter.png" alt=""></a></li>
-                            <li><a class="linkedin-img" href="#"><img src="~/Content/User/images/Homepage/linkedin.png" alt=""></a></li>
-                        </ul>
-                    </div>
+        <!-- MyDownloads Box Ends -->
+        <!-- Pagination -->
+        <div class="pagination-section">
+            <div class="pagination-notes">
+                <div class="pagination-number">
+                    @Html.PagedListPager(mydownload, page => Url.Action("myDownloads", new
+               {
+                   page,
+                   //Search = Request.QueryString["searchnotes"]
+                   // SortOrder = Request.QueryString["SortOrder"]
+               })
+           , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 5 }
+           )
                 </div>
             </div>
-        </footer>
-        <!-- Footer Ends -->
+        </div>
+        <!-- Pagination -->
 
     </section>
 
-    <!-- Java-scripts -->
-    <!-- JQuery -->
-    <script src="~/Scripts/User/js/jquery.js"></script>
-
-    <!-- Production version -->
-    <!-- <script src="https://unpkg.com/@@popperjs/core@2"></script> -->
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-
-    <!-- Bootstrap JS -->
-    <script src="~/Scripts/User/js/bootstrap/bootstrap.min.js"></script>
-
-    <!-- Custom JS -->
-    <script src="~/Scripts/User/js/script.js"></script>
-
-
-
-    <!-- Java-scripts -->
 </body>
-
-</html>

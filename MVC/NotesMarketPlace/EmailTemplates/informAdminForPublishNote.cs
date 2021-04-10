@@ -11,9 +11,9 @@ namespace NotesMarketPlace.EmailTemplates
     {
         public static void sellerRequestToAdmin(string sellerName, string notetitle)
         {
-            var fromEmail = new MailAddress("supportedEmail", "Notes Marketplace"); //need system email
-            var toEmail = new MailAddress("AdminEmail");
-            var fromEmailPassword = "Password"; // Replace with actual password
+            var fromEmail = new MailAddress("SupportEmail", "Notes Marketplace"); //need system email
+            var toEmail = new MailAddress("adminMail");
+            var fromEmailPassword = "password"; // Replace with actual password
             string subject = sellerName + " sent his note for review";
             string msg = "Hello Admin,<br/>";
             msg += "We want to inform you that," + sellerName + " sent his note " + notetitle + " for review.Please look at the notes and take required actions.";

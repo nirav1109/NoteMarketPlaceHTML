@@ -1,36 +1,18 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    Layout = "~/Views/Shared/NavigationBar.cshtml";
+}
 
 <head>
 
-    <!-- Important Meta Tags -->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   
 
     <!-- Title -->
     <title>Dashboard - Notes MarketPlace</title>
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="~/Content/User/images/logo/favicon.ico">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="~/Content/User/css/font-awesome/css/fontawesome.min.css">
-
-    <!-- FontAwesome kit -->
-    <script src="https://kit.fontawesome.com/4fa77e6d3c.js" crossorigin="anonymous"></script>
-
-    <!-- Bootstrap css -->
-    <link rel="stylesheet" href="~/Content/User/css/bootstrap/bootstrap.min.css">
-
-    <!-- Custom css -->
-    <link rel="stylesheet" href="~/Content/User/css/style.css">
-
-    <!-- Responsive css -->
-    <link rel="stylesheet" href="~/Content/User/css/responsive.css">
+   
 
 </head>
 
@@ -38,113 +20,7 @@
 
     <section id="dashboard">
 
-        <!-- Header -->
-        <div class="only-white-nav extra-style-nav">
-            <header class="site-header">
-                <div class="header-wrapper">
-
-                    <!-- Mobile Menu Open Button -->
-                    <span id="mobile-nav-open-btn">&#9776;</span>
-
-                    <div class="logo-wrapper">
-                        <a href="~/User/home" title="Site Logo">
-                            <img src="~/Content/User/images/logo/dark-logo.png" alt="Logo">
-                        </a>
-                    </div>
-                    <div class="navigation-wrapper">
-                        <nav class="main-nav">
-                            <ul class="menu-navigation">
-                                <li>
-                                    <a href="~/User/searchNotes">Search Notes</a>
-                                </li>
-                                <li class="active">
-                                    <a href="~/User/addNote">Sell Your Notes</a>
-                                </li>
-                                <li>
-                                    <a href="~/User/buyersrequests">Buyer Requests</a>
-                                </li>
-                                <li>
-                                    <a href="~/User/faq">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="~/User/contactUs">Contact Us</a>
-                                </li>
-                                <li class="logged-in-user-photo-li">
-                                    <div class="dropdown">
-                                        <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <div class="logged-in-user-photo">
-                                                <img src="~/Content/User/images/testimonial/customer-1.png" alt="User Photo" class="rounded-circle">
-                                            </div>
-                                        </a>
-
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <a class="dropdown-item" href="~/User/userProfile">My Profile</a>
-                                            <a class="dropdown-item" href="~/User/myDownloads">My Downloads</a>
-                                            <a class="dropdown-item" href="~/User/mySoldNotes">My Sold Notes</a>
-                                            <a class="dropdown-item" href="~/User/myRejectedNotes">My Rejected Notes</a>
-                                            <a class="dropdown-item" href="~/User/changePassword">Change Password</a>
-                                            <a class="dropdown-item logout-btn-dropdown" href="~/User/login">Logout</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a class="btn btn-general btn-purple" href="~/User/logout" title="Download" role="button">Logout</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-
-                    <!-- Mobile Menu -->
-                    <div id="mobile-nav">
-                        <img class="logo-in-mobile-menu" src="~/Content/User/images/logo/dark-logo.png" alt="Notes Logo">
-                        <!-- Mobile Menu Close Button -->
-                        <span id="mobile-nav-close-btn">&times;</span>
-
-                        <div id="mobile-nav-content">
-                            <ul class="nav">
-                                <li>
-                                    <a href="~/User/searchNotes">Search Notes</a>
-                                </li>
-                                <li class="active">
-                                    <a href="~/User/addNote">Sell Your Notes</a>
-                                </li>
-                                <li>
-                                    <a href="~/User/buyersrequests">Buyer Requests</a>
-                                </li>
-                                <li>
-                                    <a href="~/User/faq">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="~/User/contactUs">Contact Us</a>
-                                </li>
-                                <li class=" logged-in-user-photo-li">
-                                    <div class="logged-in-user-photo">
-                                        <div class="dropdown">
-                                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img src="~/Content/User/images/testimonial/customer-1.png" alt="User Photo" class="rounded-circle">
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="~/User/userProfile">My Profile</a>
-                                                <a class="dropdown-item" href="~/User/myDownloads">My Downloads</a>
-                                                <a class="dropdown-item" href="~/User/mySoldNotes">My Sold Notes</a>
-                                                <a class="dropdown-item" href="~/User/myRejectedNotes">My Rejected Notes</a>
-                                                <a class="dropdown-item" href="~/User/changePassword">Change Password</a>
-                                                <a class="dropdown-item logout-btn-dropdown" href="~/User/login">Logout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a class="btn btn-general btn-purple" href="~/User/login" title="Download" role="button">Logout</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </header>
-        </div>
-        <!-- Header ends -->
+       
         <!-- Dashboard box -->
         <div class="content-box-lg">
 
@@ -174,14 +50,14 @@
 
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                 <div class="number-of-notes-sold dashboard-single-box">
-                                  <a href="~/User/mysoldnotes"><p class="dashboard-single-detail">@ViewBag.mySoldNotes</p></a>  
+                                    <a href="~/User/mysoldnotes"><p class="dashboard-single-detail">@ViewBag.mySoldNotes</p></a>
                                     <p class="dashboard-single-detail-inst">Number of Notes Sold</p>
                                 </div>
                             </div>
 
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                 <div class="money-earned dashboard-single-box">
-                                   <a href="~/User/mysoldnotes"> <p class="dashboard-single-detail">$ @ViewBag.totalEarning</p></a>
+                                    <a href="~/User/mysoldnotes"> <p class="dashboard-single-detail">$ @ViewBag.totalEarning</p></a>
                                     <p class="dashboard-single-detail-inst">Money Earned</p>
                                 </div>
                             </div>
@@ -196,25 +72,28 @@
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                 <div class="my-downloads dashboard-single-box">
                                     <a href="~/User/mydownloads">
-                                        <p class="dashboard-single-detail">@ViewBag.myDownloadNotes</p></a>
-                                        <p class="dashboard-single-detail-inst">My Downloads</p>
-</div>
+                                        <p class="dashboard-single-detail">@ViewBag.myDownloadNotes</p>
+                                    </a>
+                                    <p class="dashboard-single-detail-inst">My Downloads</p>
+                                </div>
                             </div>
 
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                 <div class="my-rejected-notes dashboard-single-box">
                                     <a href="~/User/myrejectednotes">
-                                        <p class="dashboard-single-detail">@ViewBag.myRejectedNotes</p></a>
-                                        <p class="dashboard-single-detail-inst">My Rejected Notes</p>
-</div>
+                                        <p class="dashboard-single-detail">@ViewBag.myRejectedNotes</p>
+                                    </a>
+                                    <p class="dashboard-single-detail-inst">My Rejected Notes</p>
+                                </div>
                             </div>
 
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                 <div class="buyer-request dashboard-single-box">
                                     <a href="~/User/buyersrequests">
-                                        <p class="dashboard-single-detail">@ViewBag.buyerRequests</p></a>
-                                        <p class="dashboard-single-detail-inst">Buyer Requests</p>
-</div>
+                                        <p class="dashboard-single-detail">@ViewBag.buyerRequests</p>
+                                    </a>
+                                    <p class="dashboard-single-detail-inst">Buyer Requests</p>
+                                </div>
                             </div>
 
                         </div>
@@ -254,7 +133,7 @@
             <div class="container">
 
                 @{
-                    IEnumerable<NotesMarketPlace.Models.AllProgressNotes> Inprogerss = ViewBag.inProgressNotes;
+                    IPagedList<NotesMarketPlace.Models.AllProgressNotes> Inprogerss = ViewBag.inProgressNotes;
                 }
 
                 <div class="in-progress-notes-table general-table-responsive">
@@ -283,14 +162,14 @@
                                             @if (@i.status.Status == "Draft")
                                             {
                                                 <td class="text-center">
-                                                    <a href="draftToPublish/@i.SellerNotes.NoteID"><img class="edit-img-in-table" src="~/Content/User/images/Dashboard/edit.png" alt="edit"></a>
+                                                    <a href="addnote/@i.SellerNotes.NoteID"><img class="edit-img-in-table" src="~/Content/User/images/Dashboard/edit.png" alt="edit"></a>
                                                     <a href="deleteNote/@i.SellerNotes.NoteID"><img class="delete-img-in-table" src="~/Content/User/images/Dashboard/delete.png" alt="delete"></a>
                                                 </td>
                                             }
                                             else
                                             {
                                                 <td class="text-center">
-                                                    <a href="noteDetails/@i.SellerNotes.NoteID"><img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="eye"></a>
+                                                    <a href="notedetail/@i.SellerNotes.NoteID"><img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="eye"></a>
                                                 </td>
                                             }
 
@@ -317,26 +196,23 @@
 
         </div>
         <!-- progress note table -->
-        <!-- pagination -->
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item">
-                    <a class="page-link" href="" aria-label="Previous">
-                        <img src="~/Content/User/images/pagination/left-arrow.png" alt="">
-                    </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="" aria-label="Next">
-                        <img style="color: white;" src="~/Content/User/images/pagination/right-arrow.png" alt="">
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <!-- Pagination -->
+        <div class="pagination-section">
+            <div class="pagination-notes">
+                <div class="pagination-number">
+                    @Html.PagedListPager(Inprogerss, page => Url.Action("dashboard", new
+               {
+                   page,
+                   Search = Request.QueryString["searchnotes"]
+                   // SortOrder = Request.QueryString["SortOrder"]
+               })
+           , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 5 }
+           )
+                </div>
+            </div>
+        </div>
+
+
         <!-- pagination -->
         <!-- published note table -->
         <div class="content-box-lg">
@@ -366,7 +242,7 @@
             <div class="container">
 
                 @{
-                    IEnumerable<NotesMarketPlace.Models.AllPublishNotes> published = ViewBag.publishedNote;
+                    IPagedList<NotesMarketPlace.Models.AllPublishNotes> published = ViewBag.publishedNote;
                 }
 
                 <div class="published-notes-table general-table-responsive">
@@ -419,62 +295,30 @@
 
         </div>
         <!-- published note table -->
-        <!-- pagination -->
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item">
-                    <a class="page-link" href="" aria-label="Previous">
-                        <img src="~/Content/User/images/pagination/left-arrow.png" alt="">
-                    </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="" aria-label="Next">
-                        <img style="color: white;" src="~/Content/User/images/pagination/right-arrow.png" alt="">
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- pagination -->
-        <!-- Footer  -->
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-sm-8 col-12 text-left">
-                        <p>Copyright &copy; TatvaSoft All Rights Reserved.</p>
-                    </div>
-                    <div class="col-md-6 col-sm-4 col-12 text-right">
-                        <ul class="social-list">
-                            <li><a class="facebook-img" href="#"><img src="~/Content/User/images/Homepage/facebook.png" alt=""></a></li>
-                            <li><a class="twitter-img" href="#"><img src="~/Content/User/images/Homepage/twitter.png" alt=""></a></li>
-                            <li><a class="linkedin-img" href="#"><img src="~/Content/User/images/Homepage/linkedin.png" alt=""></a></li>
-                        </ul>
-                    </div>
+        <!-- Pagination -->
+        <div class="pagination-section">
+            <div class="pagination-notes">
+                <div class="pagination-number">
+                    @Html.PagedListPager(published, page2 => Url.Action("dashboard", new
+               {
+                   page2,
+                   Search = Request.QueryString["searchnotes"]
+                   // SortOrder = Request.QueryString["SortOrder"]
+               })
+           , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 5 }
+           )
                 </div>
             </div>
-        </footer>
-        <!-- Footer Ends -->
+        </div>
+
+
+        <!-- pagination -->
+        
 
     </section>
 
 
-    <!-- JQuery -->
-    <script src="~/Scripts/User/js/jquery.js"></script>
-
-    <!-- Production version -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-
-    <!-- Bootstrap JS -->
-    <script src="~/Scripts/User/js/bootstrap/bootstrap.min.js"></script>
-
-    <!-- Custom JS -->
-    <script src="~/Scripts/User/js/script.js"></script>
+    
 
 </body>
 
-</html>

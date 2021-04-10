@@ -23,7 +23,8 @@ namespace NotesMarketPlace.Models
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
-    
+
+        public Nullable<double> FilesSize { get; set; }
         public virtual NoteDetails NoteDetails { get; set; }
     }
 }

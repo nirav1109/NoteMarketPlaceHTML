@@ -11,9 +11,9 @@ namespace NotesMarketPlace.EmailTemplates
     {
         public static void mailToBuyer(string buyerName, string emailId, string sellerName)
         {
-            var fromEmail = new MailAddress("supportedEmail", "Notes Marketplace"); //need system email
+            var fromEmail = new MailAddress("SupportEmail", "Notes Marketplace"); //need system email
             var toEmail = new MailAddress(emailId);
-            var fromEmailPassword = "Password"; // Replace with actual password
+            var fromEmailPassword = "password"; // Replace with actual password
             string subject = sellerName  +" Allows you to download a note";
             string msg = "";
             msg += "Hello " + buyerName + ",<br>";

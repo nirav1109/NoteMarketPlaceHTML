@@ -171,6 +171,7 @@
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
     <Property Name="ModifiedBy" Type="Int32" />
     <NavigationProperty Name="NoteDetails" Relationship="Self.FK_SellerNoteAttachment_NoteID" FromRole="SellerNoteAttachment" ToRole="NoteDetails" />
+    <Property Name="FilesSize" Type="Double" />
   </EntityType>
   <EntityType Name="SpamReports">
     <Key>

@@ -46,33 +46,33 @@
                         <form method="post" action="login">
                             <div class="success-msg">
                                 @TempData["Message"]
+                            </div>
+                            <div class="form-group">
+                                <label class="info-label" for="exampleInputEmail1">Email</label>
+                                @Html.TextBoxFor(x => x.EmailID, new { @class = "form-control input-box-style", @id = "exampleInputEmail1", @placeholder = "Enter your email" })
+                                @Html.ValidationMessage("Email", new { @style = "color:red" })
+                            </div>
+                            <div class="form-group">
+                                <label class="info-label" for="Password">Password</label>
+                                <div class="forgot-password-label-box">
+                                    <label><a class="forgot-password-label" href="~/User/forgot">Forgot Password?</a></label>
                                 </div>
-                                <div class="form-group">
-                                    <label class="info-label" for="exampleInputEmail1">Email</label>
-                                    @Html.TextBoxFor(x => x.EmailID, new { @class = "form-control input-box-style", @id = "exampleInputEmail1", @placeholder = "Enter your email" })
-                                    @Html.ValidationMessage("Email", new { @style = "color:red" })
-                                </div>
-                                <div class="form-group">
-                                    <label class="info-label" for="Password">Password</label>
-                                    <div class="forgot-password-label-box">
-                                        <label><a class="forgot-password-label" href="~/User/forgot">Forgot Password?</a></label>
-                                    </div>
 
-                                    @Html.PasswordFor(x => x.Password, new {@type="password", @class = "form-control input-box-style", @id = "Password", @placeholder = "Enter your password" })
+                                @Html.PasswordFor(x => x.Password, new { @type = "password", @class = "form-control input-box-style", @id = "Password", @placeholder = "Enter your password" })
 
-                                    <div class="eye"><img class="eye-img" src="~/Content/User/images/login/eye.png" alt="eye"></div>
+                                <div class="eye"><img class="eye-img" src="~/Content/User/images/login/eye.png" alt="eye"></div>
 
-                                    <div class="incorrect-password-label">
-                                        @Html.Raw(@ViewBag.log)
-                                    </div>
+                                <div class="incorrect-password-label">
+                                    @Html.Raw(@ViewBag.log)
                                 </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label id="remember-me-label" class="form-check-label" for="exampleCheck1">Remember Me</label>
-                                </div>
-                                <div class="form-btn">
-                                    <button type="submit" class="btn btn-general btn-purple">Login</button>
-                                </div>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label id="remember-me-label" class="form-check-label" for="exampleCheck1">Remember Me</label>
+                            </div>
+                            <div class="form-btn">
+                                <button type="submit" class="btn btn-general btn-purple">Login</button>
+                            </div>
                         </form>
                         <div class="toggle-btw-login-signup" class="text-center">
                             <p>Don't have an account? <span><a href="~/User/signup">Sign Up</a></span></p>

@@ -312,6 +312,8 @@
     <Compile Include="EmailTemplates\informAdminForPublishNote.cs" />
     <Compile Include="EmailTemplates\informBuyer.cs" />
     <Compile Include="EmailTemplates\informSeller.cs" />
+    <Compile Include="EmailTemplates\spamReportMail.cs" />
+    <Compile Include="EmailTemplates\unpublishSellerNote.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -323,6 +325,7 @@
     <Compile Include="Models\Countries.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DNFilter.cs" />
     <Compile Include="Models\DownloadNotes.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -448,6 +451,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\User\dashboard.cshtml" />
+    <Content Include="Views\Shared\NavigationBar.cshtml" />
+    <Content Include="Views\Shared\AdminNavigation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

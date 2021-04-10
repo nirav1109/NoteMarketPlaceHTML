@@ -141,6 +141,7 @@
     <Property Name="NoteAttachmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NoteID" Type="int" Nullable="false" />
     <Property Name="FileName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="FilesSize" Type="float" />
     <Property Name="FilePath" Type="varchar(max)" Nullable="false" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" />

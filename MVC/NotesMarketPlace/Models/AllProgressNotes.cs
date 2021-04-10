@@ -15,6 +15,8 @@ namespace NotesMarketPlace.Models
         public SellerNoteAttachment Attachmnet { get; set; }
         public UserProfile uprofiledata { get; set; }
         public Countries country { get; set;}
+        public Users buyer { get; set; }
+        public SpamReports spam { get; set; }
 
        
         public NoteReviews notereview { get; set; }
@@ -30,6 +32,7 @@ namespace NotesMarketPlace.Models
         public NoteDetails note { get; set; }
         public NoteCategories Category { get; set; }
         public Countries countryname { get; set; }
+        public NoteReviews nr { get; set; }
     }
 
 

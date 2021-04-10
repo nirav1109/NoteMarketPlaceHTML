@@ -147,7 +147,7 @@ namespace NoteMarketPlace.Controllers
                             int upCheck = nm.UserProfile.Where(x => x.UserID == user.UserID).Count();
                             if (upCheck > 0)
                             {
-                                return RedirectToAction("dashboard", "User");
+                                return RedirectToAction("searchnotes", "User");
                             }
                             else
                             {
@@ -175,8 +175,12 @@ namespace NoteMarketPlace.Controllers
 
 
         //logout (destory session)
+        [Authorize]
         public ActionResult Logout()
         {
+            Session.Remove("Userid");
+            Session.Remove("FullName");
+            Session.Remove("EmaiID");
             FormsAuthentication.SignOut();
             return RedirectToAction("login");
 
@@ -312,19 +316,41 @@ namespace NoteMarketPlace.Controllers
         }
 
 
+        [Authorize]
         [HttpGet]
-        public ActionResult addnote()
+
+        public ActionResult addnote(int? id)
         {
             using (NMEntities nm = new NMEntities())
-            {                
-                    ViewBag.notecategoies = new SelectList(nm.NoteCategories.ToList(), "NoteCategoryID", "CategoryName");
-                    ViewBag.notetypes = new SelectList(nm.NoteType.ToList(), "NoteTypeID", "TypeName");
-                    ViewBag.countries = new SelectList(nm.Countries.ToList(), "CountryID", "CountryName");
+            {
+                ViewBag.notecategoies = new SelectList(nm.NoteCategories.ToList(), "NoteCategoryID", "CategoryName");
+                ViewBag.notetypes = new SelectList(nm.NoteType.ToList(), "NoteTypeID", "TypeName");
+                ViewBag.countries = new SelectList(nm.Countries.ToList(), "CountryID", "CountryName");
+                if (id != null)
+                {
+                    NoteDetailsDummy adn = new NoteDetailsDummy();
+                    var noteattachdata = nm.SellerNoteAttachment.Where(x => x.NoteID == id).FirstOrDefault();
+                    var notedata = nm.NoteDetails.Where(x => x.NoteID == id).FirstOrDefault();
+                    adn.NoteTitle = notedata.NoteTitle;
+                    adn.NoteCategoryID = notedata.NoteCategoryID;
+                    adn.NoteTypeID = notedata.NoteTypeID;
+                    adn.NumberOfPages = notedata.NumberOfPages;
+                    adn.CountryID = notedata.CountryID;
+                    adn.Course = notedata.Course;
+                    adn.CourseCode = notedata.CourseCode;
+                    adn.NoteDescription = notedata.NoteDescription;
+                    adn.ProfessorName = notedata.ProfessorName;
+                    adn.SellType = notedata.SellType;
+                    adn.SellPrice = notedata.SellPrice;
+                    adn.UniversityInformation = notedata.UniversityInformation;
+                    var dpPath = notedata.DisplayPicture;
+                    return View(adn);
+                }
             }
             return View();
         }
 
-
+        [Authorize]
         [HttpPost]
         public ActionResult addnote(NoteDetailsDummy notedetails,string submit)
         {
@@ -424,8 +450,10 @@ namespace NoteMarketPlace.Controllers
                         var count = 1;
                         var FilePath = "";
                         var FileName = "";
+                        long FileSize = 0;
                         foreach (var file in notedetails.NoteAttachment)
                         {
+                            FileSize += ((file.ContentLength) / 1024);
                             string fileName = Path.GetFileNameWithoutExtension(file.FileName);
                             string extension = Path.GetExtension(file.FileName);
                             fileName = "Attachment_" + count + "_" + DateTime.Now.ToString("ddMMyyyy") + extension;
@@ -437,7 +465,7 @@ namespace NoteMarketPlace.Controllers
                         }
                         sna.FileName = FileName;
                         sna.FilePath = FilePath;
-
+                        sna.FilesSize = FileSize;
                         sna.NoteID = nd.NoteID;
                         sna.IsActive = true;
                         sna.CreatedDate = DateTime.Now;
@@ -469,9 +497,10 @@ namespace NoteMarketPlace.Controllers
         }
 
 
+        [Authorize]
         [Route("noteReview/id")]
         //GET: NoteReview
-        public ActionResult noteReview(NoteReviews model, int noteID)
+        public ActionResult noteReview( NoteReviews model, int noteID)
         {
             if (ModelState.IsValid)
             {
@@ -502,7 +531,8 @@ namespace NoteMarketPlace.Controllers
 
 
         // GET
-        public ActionResult dashboard(string submit,string searchnotes)
+        [Authorize]
+        public ActionResult dashboard(string submit,string searchnotes,int?page,int?page2)
         {
             using (NMEntities DBobj = new NMEntities())
             {
@@ -525,12 +555,12 @@ namespace NoteMarketPlace.Controllers
                 List<NoteDetails> SellerNotes = null;
                 if (submit == "search1")
                 {
-                    SellerNotes = DBobj.NoteDetails.Where(x => x.SellerID == userid && (x.Status == 4 || x.Status == 1) &&
+                    SellerNotes = DBobj.NoteDetails.Where(x => x.SellerID == userid && (x.Status == 4 || x.Status == 1 ||  x.Status == 5) &&
                                                         (x.NoteTitle.StartsWith(searchnotes) || searchnotes == null)).ToList();
                 }
                 else
                 {
-                    SellerNotes = DBobj.NoteDetails.Where(x => x.SellerID == userid && (x.Status == 4 || x.Status == 1)).ToList();
+                    SellerNotes = DBobj.NoteDetails.Where(x => x.SellerID == userid && (x.Status == 4 || x.Status == 1 || x.Status == 5)).ToList();
                 }
                   
                 var ProgressNotes = (from sell in SellerNotes
@@ -545,7 +575,7 @@ namespace NoteMarketPlace.Controllers
                                      }).ToList();
 
 
-                ViewBag.inProgressNotes = ProgressNotes;
+                ViewBag.inProgressNotes = ProgressNotes.ToPagedList(page ?? 1,5);
                 ViewBag.inProgressNotesCount = ProgressNotes.Count();
 
                 List<NoteDetails> PublishedNote = null;
@@ -573,7 +603,7 @@ namespace NoteMarketPlace.Controllers
 
                                       }).ToList();
 
-                ViewBag.publishedNote = PublishedNoted;
+                ViewBag.publishedNote = PublishedNoted.ToPagedList(page2??1,5);
                 ViewBag.publishedNoteCount = PublishedNoted.Count();
 
 
@@ -583,7 +613,7 @@ namespace NoteMarketPlace.Controllers
            
         }
 
-
+        [Authorize]
         //GET: Notedetails
         [Route("notedetail /{id}")]
         public ActionResult notedetail(int? id)
@@ -632,51 +662,62 @@ namespace NoteMarketPlace.Controllers
         }
 
 
-
+        [Authorize]
         //get
         public ActionResult userprofile()
         {
             using (NMEntities nm = new NMEntities())
             {
+                ViewBag.countries = new SelectList(nm.Countries.ToList(), "CountryID", "CountryName");
+                ViewBag.countryCode = new SelectList(nm.Countries.ToList(), "CountryID", "CountryCode");
+
                 int id = (int)Session["Userid"];
-                var user = nm.Users.Where(x => x.UserID == id).FirstOrDefault();
+                Users user = nm.Users.Where(x => x.UserID == id).FirstOrDefault();
                 UserProfile userprofiles = nm.UserProfile.Where(x => x.UserID == id).FirstOrDefault();
                 UserProfileData upd = new UserProfileData();
-                ViewBag.firstName = user.FirstName;
-                ViewBag.lastName = user.LastName;
-                ViewBag.email = user.EmailID;
 
-                var countryname = nm.Countries.ToList();
-                ViewBag.countries = new SelectList(countryname, "CountryID", "CountryName");
-                var countrycode = nm.Countries.ToList();
-                ViewBag.countryCode = new SelectList(countrycode, "CountryID", "CountryCode");
-
-                if (userprofiles != null)
+                if (user != null)
                 {
-                    upd.DateOfBirth = userprofiles.DateOfBirth;
-                    upd.AddressLine1 = userprofiles.AddressLine1;
-                    upd.AddressLine2 = userprofiles.AddressLine2;
-                    upd.City = userprofiles.City;
-                    upd.State = userprofiles.State;
-                    upd.ZipCode = userprofiles.ZipCode;
-                    upd.University = userprofiles.University;
-                    upd.College = userprofiles.College;
-                    upd.PhoneNumber = userprofiles.PhoneNumber;
-                   
+                    upd.FirstName = user.FirstName;
+                    upd.LastName = user.LastName;
+                    upd.EmailID = user.EmailID;
 
+                    if (userprofiles != null)
+                    {
+                        upd.DateOfBirth = userprofiles.DateOfBirth;
+                        upd.PhoneNumber = userprofiles.PhoneNumber;
+                        upd.AddressLine1 = userprofiles.AddressLine1;
+                        upd.AddressLine2 = userprofiles.AddressLine2;
+                        upd.City = userprofiles.City;
+                        upd.State = userprofiles.State;
+                        upd.ZipCode = userprofiles.ZipCode;
+                        upd.University = userprofiles.University;
+                        upd.College = userprofiles.College;
+                        upd.CountryCode = userprofiles.CountryCode;
+                        upd.CountryID = userprofiles.CountryID;
+                        upd.Gender = userprofiles.Gender;
+                        
+                    }
+                    Session["dp"] = userprofiles.ProfilePicture;
                     return View(upd);
                 }
-
+                Session["dp"] = userprofiles.ProfilePicture;
                 return View();
             }
 
 
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult userprofile(UserProfileData upd)
+
         {
-            
+            if (ModelState.IsValid)
+            {
+
+
+
                 using (NMEntities nm = new NMEntities())
                 {
                     int id = (int)Session["Userid"];
@@ -712,7 +753,7 @@ namespace NoteMarketPlace.Controllers
                         profile.SecondaryEmailAddress = upd.SecondaryEmailAddress;
                         profile.PhoneNumber = upd.PhoneNumber;
 
-                       
+
 
                         nm.SaveChanges();
                         string path = Path.Combine(Server.MapPath("~/Member/" + Session["Userid"].ToString()));
@@ -730,7 +771,7 @@ namespace NoteMarketPlace.Controllers
                             string finalpath = Path.Combine(path, fileName);
                             upd.ProfilePicture.SaveAs(finalpath);
 
-                            profile.ProfilePicture = Path.Combine(("~/Member/" + Session["Userid"].ToString()), fileName);
+                            profile.ProfilePicture = Path.Combine(("/Member/" + Session["Userid"].ToString()+"/"), fileName);
                             nm.SaveChanges();
                         }
 
@@ -772,7 +813,7 @@ namespace NoteMarketPlace.Controllers
                             string finalpath = Path.Combine(path, fileName);
                             upd.ProfilePicture.SaveAs(finalpath);
 
-                            profile.ProfilePicture = Path.Combine(("~/Member/" + Session["Userid"].ToString()), fileName);
+                            profile.ProfilePicture = Path.Combine(("/Member/" + Session["Userid"].ToString()+"/"), fileName);
                             nm.SaveChanges();
                         }
 
@@ -780,12 +821,15 @@ namespace NoteMarketPlace.Controllers
                     }
 
                 }
+            }
             
 
             return RedirectToAction("dashboard", "User");
         }
 
 
+
+        [Authorize]
         //Get
         public ActionResult buyersrequests(int? page)
         {
@@ -818,7 +862,7 @@ namespace NoteMarketPlace.Controllers
                 return View();
         }
 
-
+        [Authorize]
         [Route("acceptDownloadRequest /{id}")]
         public ActionResult acceptDownloadRequest(int? id)
         {
@@ -847,13 +891,13 @@ namespace NoteMarketPlace.Controllers
                 return RedirectToAction("buyersrequests", "User");
         }
 
-
-        public ActionResult myrejectednotes()
+        [Authorize]
+        public ActionResult myrejectednotes(int? page , string rejectsearch)
         {
             using (NMEntities nm = new NMEntities())
             {
                 int id = (int)Session["Userid"];
-                var rejected = (from n in nm.NoteDetails
+                var rejected = (from n in nm.NoteDetails.Where(x=>x.NoteTitle.StartsWith(rejectsearch) || rejectsearch == null)
                                 join cat in nm.NoteCategories on n.NoteCategoryID equals cat.NoteCategoryID
                                 where n.Status == 3 && n.SellerID == id
                                 select new AllProgressNotes
@@ -861,16 +905,18 @@ namespace NoteMarketPlace.Controllers
                                     SellerNotes = n,
                                     Category = cat
                                 }).ToList();
-                ViewBag.rejectedNote = rejected;
+                ViewBag.rejectedNote = rejected.ToPagedList(page ?? 1, 5); ;
             }
             return View();
         }
-        public ActionResult mysoldnotes()
+
+        [Authorize]
+        public ActionResult mysoldnotes(int? page,string soldsearch)
         {
             using (NMEntities nm = new NMEntities())
             {
                 int id = (int)Session["Userid"];
-                var soldnotes = (from n in nm.NoteDetails
+                var soldnotes = (from n in nm.NoteDetails.Where(x=>x.NoteTitle.StartsWith(soldsearch) || soldsearch == null)
                                  join dn in nm.DownloadNotes on n.NoteID equals dn.NoteID
                                  where dn.IsSellerHasAllowedDownload == true && dn.SellerID == id
                                  join cat in nm.NoteCategories on n.NoteCategoryID equals cat.NoteCategoryID
@@ -883,16 +929,20 @@ namespace NoteMarketPlace.Controllers
                                      user = u
                                  }).ToList();
 
-                ViewBag.mysoldnotes = soldnotes;
+                ViewBag.mysoldnotes = soldnotes.ToPagedList(page ?? 1, 5); ;
             }
             return View();
         }
 
+
+        [Authorize]
         //get
         public ActionResult changepassword()
         {
             return View();
         }
+
+        [Authorize]
         [HttpPost]
         public ActionResult changepassword(ChangePassword cp)
         {
@@ -914,6 +964,7 @@ namespace NoteMarketPlace.Controllers
             return View();
         }
 
+       
         public ActionResult emailverification()
         {
             return View();
@@ -928,6 +979,7 @@ namespace NoteMarketPlace.Controllers
             return View();
         }
 
+   
         [Route("downloadflow /{ id }")]
         public ActionResult downloadflow(int? id)
         {
@@ -948,13 +1000,15 @@ namespace NoteMarketPlace.Controllers
                         var notetitle = nm.NoteDetails.Where(x => x.NoteID == id);
                         var sellerAttachement = nm.SellerNoteAttachment.Where(x => x.NoteID == id).FirstOrDefault();
 
+                        dn.AttachmentPath = sellerAttachement.FilePath;
                         dn.BuyerID = (int)Session["Userid"];
-                        dn.IsSellerHasAllowedDownload = false;
-                        dn.IsPaid = true;
-                        dn.IsAttachmentDownloaded = false;
+                        dn.IsSellerHasAllowedDownload = true;
+                        dn.IsPaid = false;
+                        dn.IsAttachmentDownloaded = true;
                         dn.CreatedDate = DateTime.Now;
                         dn.CreatedBy = (int)Session["Userid"];
                         dn.IsActive = true;
+                        dn.AttachmentDownloadDate = DateTime.Now;
                         foreach (var iv in notetitle)
                         {
                             dn.NoteID = iv.NoteID;
@@ -963,6 +1017,7 @@ namespace NoteMarketPlace.Controllers
                             dn.NoteTitle = iv.NoteTitle;
                             dn.NoteCategory = (iv.NoteCategoryID).ToString();
                             sellerId = iv.SellerID;
+                            
                         }
 
                         nm.DownloadNotes.Add(dn);
@@ -1014,6 +1069,7 @@ namespace NoteMarketPlace.Controllers
                          dn.CreatedDate = DateTime.Now;
                          dn.CreatedBy = (int)Session["Userid"];
                          dn.IsActive = true;
+                        dn.AttachmentDownloadDate = DateTime.Now;
                          foreach (var iv in notetitle)
                          {
                             dn.NoteID = iv.NoteID;
@@ -1051,10 +1107,10 @@ namespace NoteMarketPlace.Controllers
                  return RedirectToAction("login", "User");
              }
             
-        }       
+        }
 
-
-        public ActionResult mydownloads()
+        [Authorize]
+        public ActionResult mydownloads(int? page, string downloadSearch)
         {
             try
             {
@@ -1065,7 +1121,7 @@ namespace NoteMarketPlace.Controllers
 
                    
                     var downloadNotes = (from dn in nm.DownloadNotes
-                                        join n in nm.NoteDetails on dn.NoteID equals n.NoteID
+                                        join n in nm.NoteDetails.Where(x => x.NoteTitle.StartsWith(downloadSearch) || downloadSearch == null) on dn.NoteID equals n.NoteID
                                         where dn.BuyerID == id && dn.IsSellerHasAllowedDownload == true && dn.IsActive == true
                                         join nc in nm.NoteCategories on n.NoteCategoryID equals nc.NoteCategoryID
                                         join u in nm.Users on dn.SellerID equals u.UserID
@@ -1077,7 +1133,7 @@ namespace NoteMarketPlace.Controllers
                                             downloadNote = dn,
                                             Category = nc
                                         }).ToList();
-                    ViewBag.DownloadNotes = downloadNotes;
+                    ViewBag.DownloadNotes = downloadNotes.ToPagedList(page ?? 1,5);
                     ViewBag.DownloadNotesCount = downloadNotes.Count();
 
                 }
@@ -1091,10 +1147,10 @@ namespace NoteMarketPlace.Controllers
             
         }
         //Get 
-        public ActionResult searchnotes(string search,string NoteTypeID,string NoteCategoryID,string UniversityInformation, string CountryID,string Course)
+        public ActionResult searchnotes(int?page,string search,string NoteTypeID,string NoteCategoryID,string UniversityInformation, string CountryID,string Course,decimal? rating)
         {
-            using (NMEntities nm = new NMEntities())
-            {
+            NMEntities nm = new NMEntities();
+            
 
                 var notecategory = nm.NoteCategories.Distinct().ToList();
                 var notetype = nm.NoteType.Distinct().ToList();
@@ -1122,33 +1178,45 @@ namespace NoteMarketPlace.Controllers
                                     && (n.NoteCategoryID.ToString() == NoteCategoryID || String.IsNullOrEmpty(NoteCategoryID)) 
                                     && (n.UniversityInformation.ToString() == UniversityInformation || String.IsNullOrEmpty(UniversityInformation))
                                     && (n.CountryID.ToString() == CountryID || String.IsNullOrEmpty(CountryID))
-                                    && (n.Course.ToString() == Course || String.IsNullOrEmpty(Course)))
+                                    && (n.Course.ToString() == Course || String.IsNullOrEmpty(Course)))                                    
                                     select new nd
                                     {
                                         note = n,
                                         countryname = c
+                                       
                                     }).ToList();
 
-                ViewBag.filterNotes = seachedNotes;
+                ViewBag.filterNotes = seachedNotes.ToPagedList(page ?? 1,6);
 
                 ViewBag.nd = seachedNotes.Count();
 
-               
 
-                return View();
+            if (Session["UserID"] != null)
+            {
+                int usid = (int)Session["UserID"];
+                var dp = nm.UserProfile.Where(x => x.UserID == usid).Select(x => x.ProfilePicture).FirstOrDefault();
+                Session["dp"] = dp;
             }
+            return View();
+            
 
         }
 
-
+        [Authorize]
         [Route("spamReport/id")]
-        public ActionResult spamReport(NoteReviews model,int id)
+        public ActionResult spamReport(string remark, int noteID1)
         {
-            if (model.Comments!=null)
+
+
+            if (remark != null)
             {
-                using(NMEntities nm=new NMEntities())
+                using (NMEntities DBobj = new NMEntities())
                 {
-                    int count = nm.SpamReports.Where(x => x.NoteID == id && x.ReportByID == (int)Session["Userid"]).Count();
+                    int user = (int)Session["UserID"];
+                    var n = DBobj.NoteDetails.Where(x => x.NoteID == noteID1).FirstOrDefault();
+                    var dn = DBobj.DownloadNotes.Where(x => x.NoteID == noteID1 && x.BuyerID == user).FirstOrDefault();
+                    var s = DBobj.Users.Where(x => x.UserID == n.SellerID).FirstOrDefault();
+                    int count = DBobj.SpamReports.Where(x => x.NoteID == noteID1 && x.ReportByID == user).Count();
                     if (count > 0)
                     {
                         ViewBag.spammsg = "You have already reported for this note";
@@ -1156,21 +1224,62 @@ namespace NoteMarketPlace.Controllers
                     else
                     {
                         SpamReports sr = new SpamReports();
-                        sr.NoteID = id;
-                        sr.ReportByID = (int)Session["Userid"];
-                        sr.Remark = model.Comments;
+                        sr.NoteID = noteID1;
+                        sr.ReportByID = user;
+                        sr.Remark = remark;
+                        sr.AgainstDownloadID = dn.DownloadNoteID;
                         sr.IsActive = true;
-                        sr.CreatedBy = (int)Session["Userid"];
-                        sr.ModifiedBy = (int)Session["Userid"];
-                        sr.CreatedDate = DateTime.Now;                   
+                        sr.CreatedBy = user;
+                        sr.ModifiedBy = user;
+                        sr.ModifiedDate = DateTime.Now;
+                        sr.CreatedDate = DateTime.Now;
+
+                        DBobj.SpamReports.Add(sr);
+                        DBobj.SaveChanges();
+
+                        spamReportMail.spamReport(s.FirstName, Session["FullName"].ToString(), n.NoteTitle);
                         return RedirectToAction("mydownloads", "User");
                     }
-                        
+                    return RedirectToAction("myDownloads", "User");
                 }
-                
             }
+            return RedirectToAction("mydownloads", "User");
+        }
 
-            return RedirectToAction("mydownloads","User");
+        [Authorize]
+        [Route("adminDownloadNote/id")]
+        //GET: AdminDownloadNote
+        public ActionResult userDownloadNote(int id)
+        {
+            using (NMEntities DBobj = new NMEntities())
+            {
+                SellerNoteAttachment sellerAttachement = DBobj.SellerNoteAttachment.Where(x => x.NoteID == id).FirstOrDefault();
+
+                //Return files
+
+                var filesPath = sellerAttachement.FilePath.Split(';');
+                var filesName = sellerAttachement.FileName.Split(';');
+                using (var ms = new MemoryStream())
+                {
+                    using (var z = new ZipArchive(ms, ZipArchiveMode.Create, true))
+                    {
+                        foreach (var FilePath in filesPath)
+                        {
+                            string FullPath = Path.Combine(Server.MapPath(FilePath));
+                            string FileName = Path.GetFileName(FullPath);
+                            if (FileName == "userDownloadNote")
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                z.CreateEntryFromFile(FullPath, FileName);
+                            }
+                        }
+                    }
+                    return File(ms.ToArray(), "application/zip", "Attachement.zip");
+                }
+            }
         }
 
     }
